@@ -1,21 +1,26 @@
+import configparser
 import os
 import random
 from datetime import datetime
-from .project_dummy_data import devices_status,hash_format,date_format
+from .project_dummy_data import hash_format,date_format
+
+config = configparser.ConfigParser()
+config.read('config.ini')
 
 class Generate_Files:
 
    def __init__(self):
-      self.devices_status = devices_status
+      self.devices_status = config.get('general', 'devices_status').split(',')
       self.hash_format = hash_format
       self.date_format = date_format
-      self.folder_counter = 0
+      self.counter_folder = 0
+      self.counter_file = 0
 
    def generate_mission_files(self,missions,num_files):
-     self.folder_counter +=1
+     self.counter_folder +=1
      current_directory = os.path.dirname(os.path.abspath(__file__))
      date_time = datetime.now().strftime('%Y%m%d%H%M%S')
-     output_directory = os.path.join(current_directory, f"SIMULACIONES/folder-{date_time}-{self.folder_counter}")
+     output_directory = os.path.join(current_directory, f"SIMULACIONES/Folder-{self.counter_folder}")
 
 
      if not os.path.exists(output_directory):
@@ -35,11 +40,12 @@ class Generate_Files:
      selected_files_data = selected_files_data = random.choices(all_files_data, k=num_files)
 
      for file_data in selected_files_data:
+         self.counter_file +=1
          name = file_data["mission"]
          component = file_data["component"]
          status = file_data["status"]
          date_time = self.date_format()
-         file_name = f"Mission_{name}_{component}_{date_time}_{random.randint(1, 100)}.txt"
+         file_name = f"APL[{name}]_{component}-0000{self.counter_file}.log"
          file_path = os.path.join(output_directory, file_name)
 
          with open(file_path, 'w') as file:

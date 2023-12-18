@@ -16,8 +16,6 @@ project_devices = [
         {"id": 6, "name": "Space_food"}
     ]
 
-devices_status = ["excellent", "good", "warning", "faulty", "killed"]
-
 def hash_format(date, mission_name, device_type, device_status):
        return date+"_"+mission_name+"_"+device_type+"_"+device_status
 
