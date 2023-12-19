@@ -4,7 +4,8 @@ project_missions = [
         {"id": 1, "name": "OrbitOne", "components": ["Satellite", "Space_Suit","Space_food"]},
         {"id": 2, "name": "ColonyMoon", "components": ["Satellite", "Space_vehicle","Space_rockets"]},
         {"id": 3, "name": "VacMars", "components": ["Satellite", "Space_Suit", "Space_vehicle"]},
-        {"id": 4, "name": "GalaxyTwo", "components": ["Space_Suit", "Space_vehicle","Satellite","Space_food"]}
+        {"id": 4, "name": "GalaxyTwo", "components": ["Space_Suit", "Space_vehicle","Satellite","Space_food"],},
+        {"id" :5, "name":"UNKN", "components": []}
     ]
 
 project_devices = [

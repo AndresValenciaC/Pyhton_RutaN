@@ -19,7 +19,7 @@ class Generate_Files:
    def generate_mission_files(self,missions,num_files):
      self.counter_folder +=1
      current_directory = os.path.dirname(os.path.abspath(__file__))
-     date_time = datetime.now().strftime('%Y%m%d%H%M%S')
+
      output_directory = os.path.join(current_directory, f"SIMULACIONES/Folder-{self.counter_folder}")
 
 
@@ -34,7 +34,14 @@ class Generate_Files:
 
          status_components = {component : random.choice(self.devices_status) for component in components}
 
-         component_data = [{"mission": name, "component": component, "status": status} for component, status in status_components.items()]
+         if name == "UNKN":
+            name = "Unknown"
+            component = "Unknown"
+            status_components = "Unknown"
+            component_data.append({"mission": name, "component": component, "status": status_components})
+         else:
+
+          component_data = [{"mission": name, "component": component, "status": status} for component, status in status_components.items()]
          all_files_data.extend(component_data)
 
      selected_files_data = selected_files_data = random.choices(all_files_data, k=num_files)
