@@ -23,11 +23,17 @@ class Apolo11:
 
      for mission in missions:
          name = mission["name"]
-         components = mission["components"]
+         component_data = []
 
-         status_components = {component : random.choice(devices_status) for component in components}
-
-         component_data = [{"mission": name, "component": component, "status": status} for component, status in status_components.items()]
+         if name == "UNKN":
+            name = "Unknown"
+            components = "Unknown"
+            status_components = "Unknown"
+            component_data.append({"mission": name, "component": components, "status": status_components})
+         else:
+            components = mission["components"]
+            status_components = {component : random.choice(devices_status) for component in components}
+            component_data = [{"mission": name, "component": component, "status": status} for component, status in status_components.items()]    
          all_files_data.extend(component_data)
 
      selected_files_data = selected_files_data = random.choices(all_files_data, k=num_files)
@@ -41,14 +47,18 @@ class Apolo11:
          file_path = os.path.join(output_directory, file_name)
 
          with open(file_path, 'w') as file:
-            hash_m = hash_format(date_time,name,component,status)
+            if name == "Unknown":
+               hash_m = "Unknown"
+            else:
+               hash_m = hash_format(date_time, name, component, status)
+
             file.write("Date: " + date_time + "\n")
             file.write("Mission: " + name + "\n")
             file.write("Device Type: " + component + "\n")
             file.write("Device Status: " + status + "\n")
             file.write("Hash: " + hash_m + "\n")
 
-
+# Hola
 # realizar cambio de prueba4
 
 
