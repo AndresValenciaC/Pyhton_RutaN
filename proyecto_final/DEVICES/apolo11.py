@@ -1,6 +1,6 @@
 import os
 import random
-import schedule
+#import schedule
 
 from project_dummy_data import project_missions,devices_status,hash_format,date_format
 
@@ -8,7 +8,7 @@ class Apolo11:
 
    mission_list = project_missions
 
-   def generate_mission_files(missions,num_files):
+   def generate_mission_files(self,missions,num_files):
      increment = lambda x: x + 1
      increment.counter = 0
      increment.counter += 1
@@ -43,6 +43,7 @@ class Apolo11:
          component = file_data["component"]
          status = file_data["status"]
          date_time = date_format()
+
          file_name = f"Mission_{name}_{component}_{date_time}_{random.randint(1, 100)}.txt"
          file_path = os.path.join(output_directory, file_name)
 
