@@ -2,7 +2,7 @@ import configparser
 import os
 import random
 from datetime import datetime
-from .project_dummy_data import hash_format,date_format
+from .functions import date_format,hash_format
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -34,17 +34,11 @@ class Generate_Files:
 
          status_components = {component : random.choice(self.devices_status) for component in components}
 
-         if name == "UNKN":
-            name = "Unknown"
-            component = "Unknown"
-            status_components = "Unknown"
-            component_data.append({"mission": name, "component": component, "status": status_components})
-         else:
 
-          component_data = [{"mission": name, "component": component, "status": status} for component, status in status_components.items()]
+         component_data = [{"mission": name, "component": component, "status": status} for component, status in status_components.items()]
          all_files_data.extend(component_data)
 
-     selected_files_data = selected_files_data = random.choices(all_files_data, k=num_files)
+     selected_files_data = random.choices(all_files_data, k=num_files)
 
      for file_data in selected_files_data:
          self.counter_file +=1
@@ -52,11 +46,19 @@ class Generate_Files:
          component = file_data["component"]
          status = file_data["status"]
          date_time = self.date_format()
-         file_name = f"APL[{name}]_{component}-0000{self.counter_file}.log"
+         hash_m =  self.hash_format(date_time,name,component,status)
+
+         file_name = f"APL[{name}]-0000[{self.counter_file}].log"
          file_path = os.path.join(output_directory, file_name)
 
+         if name == "UNKN":
+            name = "Unknown"
+            component = "Unknown"
+            status = "Unknown"
+            hash_m = f"{""}{""}{""}{""}"
+
          with open(file_path, 'w') as file:
-            hash_m =  self.hash_format(date_time,name,component,status)
+
             file.write("Date: " + date_time + "\n")
             file.write("Mission: " + name + "\n")
             file.write("Device Type: " + component + "\n")
