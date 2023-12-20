@@ -1,0 +1,25 @@
+Total simulaciones: 12
+Mission "KNOW": 3
+Mission "CLNM": 2
+Mission "TMRS": 1
+Mission "GALXONE": 3
+Mission "ORBONE": 2
+Mission "JUANITO": 1
+Device_type "KNOW": 3
+Device_type "satelites": 2
+Device_type "trajes": 3
+Device_type "vehiculos": 2
+Device_type "naves": 1
+Device_type "ANDRESYMIGUEL": 1
+device_status "KNOW": 1
+device_status "ACTIVE": 3
+device_status "INACTIVE": 8
+%Mission sobre total iteraciones: "KNOW": 25.00%
+%Mission sobre total iteraciones: "CLNM": 16.67%
+%Mission sobre total iteraciones: "TMRS": 8.33%
+%Mission sobre total iteraciones: "GALXONE": 25.00%
+%Mission sobre total iteraciones: "ORBONE": 16.67%
+%Mission sobre total iteraciones: "JUANITO": 8.33%
+%Device Status sobre total iteraciones: "KNOW": 8.33%
+%Device Status sobre total iteraciones: "ACTIVE": 25.00%
+%Device Status sobre total iteraciones: "INACTIVE": 66.67%
