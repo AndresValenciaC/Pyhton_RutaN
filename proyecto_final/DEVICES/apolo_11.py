@@ -1,7 +1,7 @@
 from datetime import time
 import schedule
 from clases import Dispositivos, Mision
-from funciones import fecha_solicitada,status
+from proyecto_final.DEVICES.functions import fecha_solicitada,status
 import logging
 
 

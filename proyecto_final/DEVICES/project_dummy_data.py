@@ -1,11 +1,15 @@
 from datetime import datetime
+#tiene que haber un registro de misiones "El nombre"
+#se les asigna codigo
+#En caso de que la misión no esté previamente definida en el registro (UNKN), se
+#deberá almacenar y asignar un identificador único a cada ejecución.
 
 project_missions = [
-        {"id": 1, "name": "OrbitOne", "components": ["Satellite", "Space_Suit","Space_food"]},
-        {"id": 2, "name": "ColonyMoon", "components": ["Satellite", "Space_vehicle","Space_rockets"]},
-        {"id": 3, "name": "VacMars", "components": ["Satellite", "Space_Suit", "Space_vehicle"]},
-        {"id": 4, "name": "GalaxyTwo", "components": ["Space_Suit", "Space_vehicle","Satellite","Space_food"],},
-        {"id" :5, "name":"UNKN", "components": []}
+        {"id": 1, "name": "ORBONE", "components": ["Satellite", "Space_Suit","Space_food"]},
+        {"id": 2, "name": "CLNM", "components": ["Satellite", "Space_vehicle","Space_rockets"]},
+        {"id": 3, "name": "TMRS", "components": ["Satellite", "Space_Suit", "Space_vehicle"]},
+        {"id": 4, "name": "GALXONE", "components": ["Space_Suit", "Space_vehicle","Satellite","Space_food"]},
+        {"id": 5, "name": "UNKN", "components": [""]},
     ]
 
 project_devices = [
