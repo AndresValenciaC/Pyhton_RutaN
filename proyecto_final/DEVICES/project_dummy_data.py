@@ -1,7 +1,10 @@
 from datetime import datetime
+#tiene que haber un registro de misiones "El nombre"
+#se les asigna codigo
+#En caso de que la misión no esté previamente definida en el registro (UNKN), se
+#deberá almacenar y asignar un identificador único a cada ejecución.
 
-project_missions = [   
-        {"id": 1, "name": "UNKN"},
+project_missions = [
         {"id": 1, "name": "OrbitOne", "components": ["Satellite", "Space_Suit","Space_food"]},
         {"id": 2, "name": "ColonyMoon", "components": ["Satellite", "Space_vehicle","Space_rockets"]},
         {"id": 3, "name": "VacMars", "components": ["Satellite", "Space_Suit", "Space_vehicle"]},
@@ -16,8 +19,6 @@ project_devices = [
         {"id": 5, "name": "Space_tools"},
         {"id": 6, "name": "Space_food"}
     ]
-
-devices_status = ["excellent", "good", "warning", "faulty", "killed"]
 
 def hash_format(date, mission_name, device_type, device_status):
        return date+"_"+mission_name+"_"+device_type+"_"+device_status
