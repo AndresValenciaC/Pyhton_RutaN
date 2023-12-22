@@ -51,4 +51,7 @@ class Generate_Files:
                 file.write(f"Device Status: {status}\n")
                 file.write(f"Hash: {hash_m}\n")
 
-
+if __name__ == "__main__":
+    generator = Generate_Files()
+    generator.generate_files(8, 13)
+    print("Files generated successfully.")
