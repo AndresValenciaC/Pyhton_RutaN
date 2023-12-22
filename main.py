@@ -4,18 +4,18 @@ import time
 import random
 from proyecto_final.DEVICES.generate_mission_files import Generate_Files
 
-
 config = configparser.ConfigParser()
 config.read('config.ini')
 
-num_files_initial = random(config.get('general', 'num_files_initial'))
-num_files_final = random(config.get('general', 'num_files_final'))
+num_files_initial = config.get('general', 'num_files_initial')
+num_files_final = config.get('general', 'num_files_final')
 time_cycle_config = config.get('general', 'time_cycle')
 
 print("Script Start")
 generate_files_instance = Generate_Files()
 
 def file_generator():
+    print("Script Job")
     generate_files_instance.generate_files(num_files_initial,num_files_final)
 
     def main():

@@ -1,7 +1,7 @@
 import os
 import random
-from functions import date_format, hash_format
-from classes import Mission, Devices, Status
+from .functions import date_format, hash_format
+from .classes import Mission, Devices, Status
 
 class Generate_Files:
     def __init__(self):
@@ -36,7 +36,6 @@ class Generate_Files:
             name, component, status = file_data["name"], file_data["component"], file_data["status"]
             date_time = self.date_format()
             hash_m = self.hash_format(date_time, name, component, status)
-
 
             if name == "UNKN":
                 name, component, status, hash_m = "Unknown", "Unknown", "Unknown", ""
