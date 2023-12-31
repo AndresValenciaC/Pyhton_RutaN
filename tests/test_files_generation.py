@@ -25,22 +25,37 @@ def test_verify_file_format():
 
     instance.generate_files(num_files_from, num_files_to)
 
-    generated_files = os.listdir(output_directory)
-    print(f"output_directory: {output_directory}")
+    generated_folders  = os.listdir(output_directory)
+    print(f"generated_folders: {generated_folders}") # folder
 
-    for generated_file in generated_files:
-        file_path = os.path.join(output_directory, generated_file)
+    for generated_folder in generated_folders:
+        folder_path = os.path.join(output_directory, generated_folder)
 
-        if os.path.isfile(file_path):
-            print(f"file_path: {file_path}")
+        if os.path.isdir(folder_path):
+            print(f"Processing contents of folder: {folder_path}")
+            folder_files = os.listdir(folder_path)
 
-            with open(file_path, 'r') as file:
-                content = file.read()
-                print(f"File Content:\n{content}")
+            for file_name in folder_files:
+                file_path = os.path.join(folder_path, file_name)
 
-                assert "Date:" in content
-                assert "Mission:" in content
-                assert "Device Type:" in content
-                assert "Device Status:" in content
-                assert "Hash:" in content
+                if os.path.isfile(file_path):
+                    with open(file_path, 'r') as file:
+                        content = file.read()
+
+                        assert "Date:" in content
+                        assert "MissionS:" in content
+                        assert "Device Type:" in content
+                        assert "Device Status:" in content
+                        assert "Hash:" in content
+
+
+
+
+
+
+
+
+
+
+
 
