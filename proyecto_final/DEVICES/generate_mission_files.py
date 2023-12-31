@@ -61,7 +61,7 @@ class Generate_Files:
          hash_m = self.hash_format(date_time, name, component, status)
 
          if name == "UNKN":
-                name, component, status, hash_m = "Unknown", "Unknown", "Unknown", ""
+                name, component, status, hash_m = "Unknown", "Unknown", "Unknown", "Unknown"
 
          file_name = f"APL[{name}]-0000[{self.file_number}].log"
          file_path = os.path.join(output_directory, file_name)
