@@ -26,7 +26,7 @@ def test_verify_file_format():
     instance.generate_files(num_files_from, num_files_to)
 
     generated_folders  = os.listdir(output_directory)
-    print(f"generated_folders: {generated_folders}") # folder
+    print(f"generated_folders: {generated_folders}") # folders
 
     for generated_folder in generated_folders:
         folder_path = os.path.join(output_directory, generated_folder)
