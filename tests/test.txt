@@ -1,0 +1,27 @@
+
+def test_verify_file_format():
+    output_directory = "/Users/andrescampovalencia/Desktop/proyecto_final/proyecto_final/DEVICES/SIMULATIONS/"
+    instance = Generate_Files()
+    num_files_from, num_files_to = 5, 10
+
+    instance.generate_files(num_files_from, num_files_to)
+
+    generated_files = os.listdir(output_directory)
+    print(f"output_directory: {output_directory}")
+
+    for generated_file in generated_files:
+        file_path = os.path.join(output_directory, generated_file)
+
+        if os.path.isfile(file_path):
+            print(f"file_path: {file_path}")
+
+            with open(file_path, 'r') as file:
+                content = file.read()
+                print(f"File Content:\n{content}")
+
+                assert "Date:" in content
+                assert "Mission:" in content
+                assert "Device Type:" in content
+                assert "Device Status:" in content
+                assert "Hash:" in content
+
