@@ -1,29 +1,32 @@
 import configparser
+import schedule
 import time
 from proyecto_final.DEVICES.generate_mission_files import Generate_Files
-from proyecto_final.DEVICES.project_dummy_data import project_missions
 
 config = configparser.ConfigParser()
 config.read('config.ini')
 
-num_files_config = config.get('general', 'num_files')
-time_cycle_config = config.get('general', 'time_cycle')
+
+num_files_initial = config.getint('general', 'num_files_initial')
+num_files_final = config.getint('general', 'num_files_final')
+time_cycle_config = config.getint('general', 'time_cycle')
+
 print("Script Start")
 generate_files_instance = Generate_Files()
 
 def file_generator():
-    print("¡The function is running!")
-    num_files = int(num_files_config)
-    generate_files_instance.generate_mission_files(project_missions,num_files)
+    print("Job function")
+    generate_files_instance.generate_files(num_files_initial, num_files_final)
+
 
 def main():
+    print("main")
+    schedule.every(time_cycle_config).seconds.do(file_generator)
 
     while True:
-        print("¡Testing schedule!")
-        file_generator()
-
-        time.sleep(int(time_cycle_config))
+        schedule.run_pending()
+        time.sleep(1)
 
 
 if __name__ == "__main__":
-    main()
+ main()
