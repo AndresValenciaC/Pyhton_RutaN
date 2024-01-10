@@ -11,6 +11,7 @@ config.read('config.ini')
 num_files_initial = config.getint('general', 'num_files_initial')
 num_files_final = config.getint('general', 'num_files_final')
 time_cycle_config = config.getint('general', 'time_cycle')
+time_limit_config = config.getint('general', 'time_limit')
 
 print("Script Start")
 generate_files_instance = Generate_Files()
@@ -30,11 +31,10 @@ def main():
     job_file_generation = schedule.every(time_cycle_config).seconds.do(file_generator)
     job_report_generation =  schedule.every(time_cycle_config).seconds.do(report_generator)
 
-    time_limit = 20
     time_start = time.time()
 
     try:
-        while time.time() - time_start < time_limit:
+        while time.time() - time_start < time_limit_config:
 
             schedule.run_pending()
             time.sleep(1)
@@ -42,11 +42,11 @@ def main():
         schedule.cancel_job(job_file_generation)
         schedule.cancel_job(job_report_generation)
 
-       # backup.move_files()
-        #backup.delete_simulations_files()
+        backup.move_files()
+        backup.delete_simulations_files()
 
     except KeyboardInterrupt:
-        print("Interruption by key board ")
+        print("Interruption by key board")
 
 
 if __name__ == "__main__":
