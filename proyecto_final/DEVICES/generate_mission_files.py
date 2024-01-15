@@ -1,16 +1,25 @@
 import os
 import random
 import time
-from .functions import date_format, hash_format
+from datetime import datetime
+import configparser
+from .functions import hash_format
 from .classes import Mission, Devices, Status
 
 class Generate_Files:
+
     def __init__(self):
+        config = configparser.ConfigParser()
+        config.read('config.ini')
+        date_format = config.get('general', 'date_format')
+        now = datetime.now()
+        self.date_format = now.strftime(date_format)
+
         self.mission_instance = Mission()
         self.devices_instance = Devices()
         self.status_instance = Status()
         self.hash_format = hash_format
-        self.date_format = date_format
+
 
     def create_output_directory(self, num_folder :int,times_stamp):
         """This method will create a directory in the correct path
@@ -57,7 +66,7 @@ class Generate_Files:
         for file_data in all_files_data:
          self.file_number += 1
          name, component, status = file_data["name"], file_data["component"], file_data["status"]
-         date_time = self.date_format()
+         date_time = self.date_format
          hash_m = self.hash_format(date_time, name, component, status)
 
          if name == "UNKN":
