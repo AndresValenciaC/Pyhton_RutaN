@@ -1,6 +1,7 @@
 import logging
 from datetime import datetime
 import os
+import configparser
 # //////////////////////////////////////////////////////////////////////////////////////////////////
 # 1.HACER LECTURA DE LAS SIMULACIONES
 # Ruta actual del script (reportes.py)
@@ -61,18 +62,32 @@ def fecha_reporte():
 
 current_time = fecha_reporte()
 
-if lista_de_diccionarios == []:
-    print ('No hay simulaciones pendientes por reportes')
-else:
-    (
-        logging.basicConfig(
-            level=logging.DEBUG,
-            format='%(message)s',
-            datefmt='%d%m%y%H%M%S',
-            filename=f'./proyecto_final/DEVICES/REPORTS/APLSTATS-{file_number}-{current_time}.log',
-            filemode='a')
-    )
 
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+# Obtener el valor actual del contador desde el archivo de configuración
+count_of_reports = config.getint('general', 'count_of_reports')
+
+# Incrementar el contador para el próximo archivo
+count_of_reports += 1
+
+# Actualizar el valor del contador en el archivo de configuración
+config.set('general', 'count_of_reports', str(count_of_reports))
+with open('config.ini', 'w') as config_file:
+    config.write(config_file)
+
+
+if lista_de_diccionarios == []:
+    print('No hay simulaciones pendientes por reportes')
+else:
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format='%(message)s',
+        datefmt='%d%m%y%H%M%S',
+        filename=f'./proyecto_final/DEVICES/REPORTS/APLSTATS-{count_of_reports}-{current_time}.log',
+        filemode='a'
+    )
 # //////////////////////////////////////////////////////////////////////////////////////////////////
 # DATA A GENERAR
 # # # Conteo total de simulaciones
