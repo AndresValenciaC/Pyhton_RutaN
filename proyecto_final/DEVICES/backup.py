@@ -5,19 +5,19 @@ from datetime import datetime
 
 # Source and destination paths
 current_directory_path = os.path.dirname(os.path.abspath(__file__))
-print(f"current_directory_path : {current_directory_path}")
+#print(f"current_directory_path : {current_directory_path}")
 
 proyecto_final_directory = os.path.abspath(os.path.join(current_directory_path, '..'))
-print(f"proyecto_final_directory : {proyecto_final_directory}")
+#print(f"proyecto_final_directory : {proyecto_final_directory}")
 
 backUps_directory_path = os.path.abspath(os.path.join(proyecto_final_directory, 'BACKUPS'))
-print(f"backUp_directory : {backUps_directory_path}")
+#print(f"backUp_directory : {backUps_directory_path}")
 
 reports_directory_path = os.path.abspath(os.path.join(current_directory_path, 'REPORTS'))
-print(f"reports_directory_path : {reports_directory_path}")
+#print(f"reports_directory_path : {reports_directory_path}")
 
 simulations_directory_path = os.path.abspath(os.path.join(current_directory_path, 'SIMULATIONS'))
-print(f"reports_directory_path : {simulations_directory_path}")
+#print(f"reports_directory_path : {simulations_directory_path}")
 
 def move_files(source_path = reports_directory_path, destination_path = backUps_directory_path):
     """

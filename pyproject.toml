@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "proyecto-final"
 version = "0.1.0"
-description = ""
-authors = ["Andres Valencia <andres228cv@gmail.com>"]
+description = "Proyect Python"
+authors = ["Andres Valencia <andres228cv@gmail.com>","Juan Prada <andres228cv@gmail.com>","Miguel Mulcue <andres228cv@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
