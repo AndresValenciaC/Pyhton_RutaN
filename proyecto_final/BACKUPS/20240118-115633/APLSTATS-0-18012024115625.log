@@ -1,0 +1,43 @@
+Total simulations: 12
+
+Cantidad de eventos por estado y dispositivo: 
+Mission "TMRS": 3
+Mission "Unknown": 3
+Mission "ORBONE": 3
+Mission "GALXONE": 3
+Device_type "Space_rockets": 2
+Device_type "Unknown": 3
+Device_type "Space_vehicle": 4
+Device_type "Satellite": 2
+Device_type "Space_tools": 1
+device_status "faulty": 3
+device_status "unknown": 4
+device_status "warning": 4
+device_status "good": 1
+
+
+Dispositivos que presentan un mayor numero de desconexiones, especificamente en el estado unknown, para cada mision: 
+Numero de veces que "unknown" aparece en "Device Status" para la mision "TMRS": 1
+Numero de veces que "unknown" aparece en "Device Status" para la mision "Unknown": 3
+Numero de veces que "unknown" aparece en "Device Status" para la mision "ORBONE": 0
+Numero de veces que "unknown" aparece en "Device Status" para la mision "GALXONE": 0
+
+
+Consolidacion de misiones con dispositivos inoperables :
+Numero de veces que "faulty-killed" aparece en "Device Status" para el dispositivo "Space_rockets": 1
+Numero de veces que "faulty-killed" aparece en "Device Status" para el dispositivo "Unknown": 0
+Numero de veces que "faulty-killed" aparece en "Device Status" para el dispositivo "Space_vehicle": 1
+Numero de veces que "faulty-killed" aparece en "Device Status" para el dispositivo "Satellite": 1
+Numero de veces que "faulty-killed" aparece en "Device Status" para el dispositivo "Space_tools": 0
+
+
+Porcentaje de datos generados para cada dispositivo y mision respecto a la cantidad de datos: 
+Total simulations: 12
+%Mission sobre total iteraciones: "TMRS": 25.00%
+%Mission sobre total iteraciones: "Unknown": 25.00%
+%Mission sobre total iteraciones: "ORBONE": 25.00%
+%Mission sobre total iteraciones: "GALXONE": 25.00%
+%Device Status sobre total iteraciones: "faulty": 25.00%
+%Device Status sobre total iteraciones: "unknown": 33.33%
+%Device Status sobre total iteraciones: "warning": 33.33%
+%Device Status sobre total iteraciones: "good": 8.33%

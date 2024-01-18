@@ -1,19 +1,21 @@
-import configparser
-import schedule
-import time
-import os
 import argparse
-from proyecto_final.DEVICES.generate_mission_files import Generate_Files
+import os
+import time
+
+import schedule
+import yaml
+
 from proyecto_final.DEVICES import backup
+from proyecto_final.DEVICES.generate_mission_files import Generate_Files
 
 #################################################################
+with open('config.yaml', 'r') as file:
+    config_data = yaml.safe_load(file)
 
-config = configparser.ConfigParser()
-config.read('config.ini')
 
-num_files_initial_config_ini = config.getint('general', 'num_files_initial')
-num_files_final_config_ini = config.getint('general', 'num_files_final')
-time_cycle_config_ini = config.getint('general', 'time_cycle')
+num_files_initial_config_yaml = config_data['general']['num_files_initial']
+num_files_final_config_yaml = config_data['general']['num_files_final']
+time_cycle_config_yaml = config_data['general']['time_cycle']
 
 #################################################################
 
@@ -45,9 +47,9 @@ def main():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Nasa Python project')
-    parser.add_argument('--num_files_initial', type=int, default=num_files_initial_config_ini, help="Number initial of files")
-    parser.add_argument('--num_files_final', type=int, default=num_files_final_config_ini, help="Final number of files")
-    parser.add_argument('--time_cycle', type=int, default=time_cycle_config_ini, help="Time in seconds for running the program")
+    parser.add_argument('--num_files_initial', type=int, default=num_files_initial_config_yaml, help="Number initial of files")
+    parser.add_argument('--num_files_final', type=int, default=num_files_final_config_yaml, help="Final number of files")
+    parser.add_argument('--time_cycle', type=int, default=time_cycle_config_yaml, help="Time in seconds for running the program")
 
     args = parser.parse_args()
     generate_files_instance = Generate_Files()
