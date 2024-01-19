@@ -1,0 +1,45 @@
+Total simulations: 15
+
+Cantidad de eventos por estado y dispositivo: 
+Mission "CLNM": 2
+Mission "Unknown": 3
+Mission "GALXONE": 4
+Mission "TMRS": 6
+Device_type "Space_tools": 6
+Device_type "Unknown": 3
+Device_type "Space_vehicle": 3
+Device_type "Space_Suit": 3
+device_status "good": 2
+device_status "unknown": 7
+device_status "killed": 2
+device_status "excellent": 1
+device_status "warning": 2
+device_status "faulty": 1
+
+
+Dispositivos que presentan un mayor numero de desconexiones, especificamente en el estado unknown, para cada mision: 
+Numero de veces que "unknown" aparece en "Device Status" para la mision "CLNM": 0
+Numero de veces que "unknown" aparece en "Device Status" para la mision "Unknown": 3
+Numero de veces que "unknown" aparece en "Device Status" para la mision "GALXONE": 2
+Numero de veces que "unknown" aparece en "Device Status" para la mision "TMRS": 2
+
+
+Consolidacion de misiones con dispositivos inoperables :
+Numero de veces que "faulty-killed" aparece en "Device Status" para el dispositivo "Space_tools": 2
+Numero de veces que "faulty-killed" aparece en "Device Status" para el dispositivo "Unknown": 0
+Numero de veces que "faulty-killed" aparece en "Device Status" para el dispositivo "Space_vehicle": 0
+Numero de veces que "faulty-killed" aparece en "Device Status" para el dispositivo "Space_Suit": 1
+
+
+Porcentaje de datos generados para cada dispositivo y mision respecto a la cantidad de datos: 
+Total simulations: 15
+%Mission sobre total iteraciones: "CLNM": 13.33%
+%Mission sobre total iteraciones: "Unknown": 20.00%
+%Mission sobre total iteraciones: "GALXONE": 26.67%
+%Mission sobre total iteraciones: "TMRS": 40.00%
+%Device Status sobre total iteraciones: "good": 13.33%
+%Device Status sobre total iteraciones: "unknown": 46.67%
+%Device Status sobre total iteraciones: "killed": 13.33%
+%Device Status sobre total iteraciones: "excellent": 6.67%
+%Device Status sobre total iteraciones: "warning": 13.33%
+%Device Status sobre total iteraciones: "faulty": 6.67%
