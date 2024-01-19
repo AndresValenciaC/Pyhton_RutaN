@@ -1,16 +1,31 @@
 import os
 import random
 import time
-from .functions import date_format, hash_format
-from .classes import Mission, Devices, Status
+from datetime import datetime
+
+import yaml
+
+from .classes import Devices, Mission, Status
+from .functions import hash_format
+
 
 class Generate_Files:
+
     def __init__(self):
+        with open('config.yaml', 'r') as file:
+            config_data = yaml.safe_load(file)
+
+        date_format = config_data['general']['date_format']
+
+        now = datetime.now()
+        self.date_formatted = now.strftime(date_format)
+
+
         self.mission_instance = Mission()
         self.devices_instance = Devices()
         self.status_instance = Status()
         self.hash_format = hash_format
-        self.date_format = date_format
+
 
     def create_output_directory(self, num_folder :int,times_stamp):
         """This method will create a directory in the correct path
@@ -57,11 +72,11 @@ class Generate_Files:
         for file_data in all_files_data:
          self.file_number += 1
          name, component, status = file_data["name"], file_data["component"], file_data["status"]
-         date_time = self.date_format()
+         date_time = self.date_formatted
          hash_m = self.hash_format(date_time, name, component, status)
 
          if name == "UNKN":
-                name, component, status, hash_m = "Unknown", "Unknown", "Unknown", "Unknown"
+                name, component, status, hash_m = "Unknown", "Unknown", "unknown", "unknown"
 
          file_name = f"APL[{name}]-0000[{self.file_number}].log"
          file_path = os.path.join(output_directory, file_name)
