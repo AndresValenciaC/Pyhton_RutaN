@@ -1,6 +1,7 @@
 import logging
 from datetime import datetime
 import os
+import configparser
 # //////////////////////////////////////////////////////////////////////////////////////////////////
 # 1.HACER LECTURA DE LAS SIMULACIONES
 # Ruta actual del script (reportes.py)
@@ -60,38 +61,33 @@ def fecha_reporte():
     return now.strftime('%d%m%Y%H%M%S')
 
 current_time = fecha_reporte()
-    
-# Ruta al archivo que almacenará el número actual del archivo
-contador_filepath = './proyecto_final/DEVICES/REPORTS/contador.txt'
 
-# Verificar si el archivo contador existe
-if os.path.exists(contador_filepath):
-    # Leer el valor actual del contador desde el archivo
-    with open(contador_filepath, 'r') as f:
-        file_number = int(f.read())
-else:
-    # Si el archivo no existe, inicializar el contador en 1
-    file_number = 1
+
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+# Obtener el valor actual del contador desde el archivo de configuración
+count_of_reports = config.getint('general', 'count_of_reports')
 
 # Incrementar el contador para el próximo archivo
-file_number += 1
+count_of_reports += 1
 
-# Escribir el nuevo valor del contador en el archivo
-with open(contador_filepath, 'w') as f:
-    f.write(str(file_number))
+# Actualizar el valor del contador en el archivo de configuración
+config.set('general', 'count_of_reports', str(count_of_reports))
+with open('config.ini', 'w') as config_file:
+    config.write(config_file)
+
 
 if lista_de_diccionarios == []:
-    print ('No hay simulaciones pendientes por reportes')
+    print('No hay simulaciones pendientes por reportes')
 else:
-    (
-        logging.basicConfig(
-            level=logging.DEBUG,
-            format='%(message)s',
-            datefmt='%d%m%y%H%M%S',
-            filename=f'./proyecto_final/DEVICES/REPORTS/APLSTATS-{file_number}-{current_time}.log',
-            filemode='a')
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format='%(message)s',
+        datefmt='%d%m%y%H%M%S',
+        filename=f'./proyecto_final/DEVICES/REPORTS/APLSTATS-{count_of_reports}-{current_time}.log',
+        filemode='a'
     )
-
 # //////////////////////////////////////////////////////////////////////////////////////////////////
 # DATA A GENERAR
 # # # Conteo total de simulaciones
@@ -151,7 +147,7 @@ for item in lista_de_diccionarios:
     device_status = item['Device Status']
 
     # Verificar si el tipo de dispositivo no es "unknown"
-    
+
     if device_status != 'Unknown':
     # Verificar si el tipo de dispositivo ya está en el diccionario de conteo
         if device in count_faulty_killed_per_device:
@@ -176,19 +172,10 @@ for mission, conteo_misiones in conteo_mission.items():
     numero = conteo_misiones/total_simulaciones
     porcentaje = numero * 100
     logging.info(f'%Mission sobre total iteraciones: "{mission}": {porcentaje:.2f}%')
-    
+
 # # # % Status misiones sobre total simulaciones
 
 for device_status, conteo_status_dispositivos in conteo_device_status.items():
     numero = conteo_status_dispositivos/total_simulaciones
     porcentaje = numero * 100
     logging.info(f'%Device Status sobre total iteraciones: "{device_status}": {porcentaje:.2f}%')
-    
-    
-    
-    
-#     data = ['Date: 31122023130828\n', 'Mission: GALXONE\n', 'Device Type: Space_tools\n', 'Device Status: unknown\n', 'Hash: 31122023130828_GALXONE_Space_tools_unknown\n', 'Date: 31122023135656\n', 'Mission: CLNM\n', 'Device Type: Space_Suit\n', 'Device Status: good\n', 'Hash: 31122023135656_CLNM_Space_Suit_good\n', 'Date: 31122023135656\n', 'Mission: CLNM\n', 'Device Type: Space_rockets\n', 'Device Status: warning\n', 'Hash: 31122023135656_CLNM_Space_rockets_warning\n', 'Date: 31122023135656\n', 'Mission: GALXONE\n', 'Device Type: Space_Suit\n', 'Device Status: killed\n', 'Hash: 31122023135656_GALXONE_Space_Suit_killed\n', 'Date: 31122023135656\n', 'Mission: GALXONE\n', 'Device Type: Space_vehicle\n', 'Device Status: faulty\n', 'Hash: 31122023135656_GALXONE_Space_vehicle_faulty\n', 'Date: 31122023135656\n', 'Mission: ORBONE\n', 'Device Type: Space_rockets\n', 'Device Status: killed\n', 'Hash: 31122023135656_ORBONE_Space_rockets_killed\n', 'Date: 31122023135656\n', 'Mission: TMRS\n', 'Device Type: Space_rockets\n', 'Device Status: unknown\n', 'Hash: 31122023135656_TMRS_Space_rockets_unknown\n', 'Date: 31122023135656\n', 'Mission: Unknown\n', 'Device Type: Unknown\n', 'Device Status: Unknown\n', 'Hash: Unknown\n', 'Date: 31122023135656\n', 'Mission: Unknown\n', 'Device Type: Unknown\n', 'Device Status: Unknown\n', 'Hash: Unknown\n']
-
-# print(type(data))
-
-# lista_de_diccionarios = [{'Date': '31122023130828', 'Mission': 'GALXONE', 'Device Type': 'Space_tools', 'Device Status': 'unknown', 'Hash': '31122023130828_GALXONE_Space_tools_unknown'}, {'Date': '31122023135656', 'Mission': 'CLNM', 'Device Type': 'Space_Suit', 'Device Status': 'good', 'Hash': '31122023135656_CLNM_Space_Suit_good'}, {'Date': '31122023135656', 'Mission': 'CLNM', 'Device Type': 'Space_rockets', 'Device Status': 'warning', 'Hash': '31122023135656_CLNM_Space_rockets_warning'}, {'Date': '31122023135656', 'Mission': 'GALXONE', 'Device Type': 'Space_Suit', 'Device Status': 'killed', 'Hash': '31122023135656_GALXONE_Space_Suit_killed'}, {'Date': '31122023135656', 'Mission': 'GALXONE', 'Device Type': 'Space_vehicle', 'Device Status': 'faulty', 'Hash': '31122023135656_GALXONE_Space_vehicle_faulty'}, {'Date': '31122023135656', 'Mission': 'ORBONE', 'Device Type': 'Space_rockets', 'Device Status': 'killed', 'Hash': '31122023135656_ORBONE_Space_rockets_killed'}, {'Date': '31122023135656', 'Mission': 'TMRS', 'Device Type': 'Space_rockets', 'Device Status': 'unknown', 'Hash': '31122023135656_TMRS_Space_rockets_unknown'}, {'Date': '31122023135656', 'Mission': 'Unknown', 'Device Type': 'Unknown', 'Device Status': 'Unknown', 'Hash': 'Unknown'}, {'Date': '31122023135656', 'Mission': 'Unknown', 'Device Type': 'Unknown', 'Device Status': 'Unknown', 'Hash': 'Unknown'}]

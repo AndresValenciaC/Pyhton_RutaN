@@ -1,0 +1,48 @@
+Total simulations: 6
+
+Cantidad de eventos por estado y dispositivo: 
+Mission "CLNM": 1
+Mission "GALXONE": 1
+Mission "ORBONE": 1
+Mission "TMRS": 2
+Mission "Unknown": 1
+Device_type "Satellite": 1
+Device_type "Space_Suit": 2
+Device_type "Space_rockets": 1
+Device_type "Space_vehicle": 1
+Device_type "Unknown": 1
+device_status "excellent": 1
+device_status "good": 2
+device_status "warning": 1
+device_status "killed": 1
+device_status "unknown": 1
+
+
+Dispositivos que presentan un mayor numero de desconexiones, especificamente en el estado unknown, para cada mision: 
+Numero de veces que "unknown" aparece en "Device Status" para la mision "CLNM": 0
+Numero de veces que "unknown" aparece en "Device Status" para la mision "GALXONE": 0
+Numero de veces que "unknown" aparece en "Device Status" para la mision "ORBONE": 0
+Numero de veces que "unknown" aparece en "Device Status" para la mision "TMRS": 0
+Numero de veces que "unknown" aparece en "Device Status" para la mision "Unknown": 1
+
+
+Consolidacion de misiones con dispositivos inoperables :
+Numero de veces que "faulty-killed" aparece en "Device Status" para el dispositivo "Satellite": 0
+Numero de veces que "faulty-killed" aparece en "Device Status" para el dispositivo "Space_Suit": 1
+Numero de veces que "faulty-killed" aparece en "Device Status" para el dispositivo "Space_rockets": 0
+Numero de veces que "faulty-killed" aparece en "Device Status" para el dispositivo "Space_vehicle": 0
+Numero de veces que "faulty-killed" aparece en "Device Status" para el dispositivo "Unknown": 0
+
+
+Porcentaje de datos generados para cada dispositivo y mision respecto a la cantidad de datos: 
+Total simulations: 6
+%Mission sobre total iteraciones: "CLNM": 16.67%
+%Mission sobre total iteraciones: "GALXONE": 16.67%
+%Mission sobre total iteraciones: "ORBONE": 16.67%
+%Mission sobre total iteraciones: "TMRS": 33.33%
+%Mission sobre total iteraciones: "Unknown": 16.67%
+%Device Status sobre total iteraciones: "excellent": 16.67%
+%Device Status sobre total iteraciones: "good": 33.33%
+%Device Status sobre total iteraciones: "warning": 16.67%
+%Device Status sobre total iteraciones: "killed": 16.67%
+%Device Status sobre total iteraciones: "unknown": 16.67%
