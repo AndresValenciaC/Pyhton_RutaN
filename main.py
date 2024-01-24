@@ -41,8 +41,8 @@ def main():
 
     except KeyboardInterrupt:
         print("\nProgram finished by user. Back up folder with reports")
-     #   backup.move_files()
-      #  backup.delete_simulations_files()
+        backup.move_files_simulations()
+        backup.move_files_reports()
 
 
 if __name__ == "__main__":
