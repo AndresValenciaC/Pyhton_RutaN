@@ -1,8 +1,10 @@
 import argparse
 import os
 import time
+
 import schedule
 import yaml
+
 from proyecto_final.DEVICES import backup
 from proyecto_final.DEVICES.generate_mission_files import Generate_Files
 
@@ -15,7 +17,7 @@ num_files_final_config_yaml = config_data['general']['num_files_final']
 time_cycle_config_yaml = config_data['general']['time_cycle']
 
 #################################################################
-
+print("Program start")
 
 def file_generator():
     print("Job function file_generator")
@@ -31,8 +33,8 @@ def report_generator():
 
 def main():
     print("main Running")
-    # job_file_generation = schedule.every(args.time_cycle).seconds.do(file_generator)
-    # job_report_generation =  schedule.every(args.time_cycle).seconds.do(report_generator)
+    job_file_generation = schedule.every(args.time_cycle).seconds.do(file_generator)
+    job_report_generation =  schedule.every(args.time_cycle).seconds.do(report_generator)
 
     try:
         while True:
