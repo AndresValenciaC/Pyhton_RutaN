@@ -1,15 +1,14 @@
 import logging
 from datetime import datetime
 import os
-# //////////////////////////////////////////////////////////////////////////////////////////////////
-# 1.HACER LECTURA DE LAS SIMULACIONES
-# Ruta actual del script (reportes.py)
-script_path = os.path.abspath(__file__)
+import configparser
+import yaml
 
-# RUTA DE LA CARPETA SIMULATIONS
+# abstraction of information from simulations
+script_path = os.path.abspath(__file__)
 folder_path = os.path.join(os.path.dirname(script_path), 'SIMULATIONS')
 
-#HACER LECTURA DEL ARCHIVO SIMULACIONES Y ALMACENARLO EN VARIABLE "DATA ALMACENADA"
+# creation of Data variable to store all the information
 data = []
 for root, dirs, files in os.walk(folder_path):
     for filename in files:
@@ -18,149 +17,123 @@ for root, dirs, files in os.walk(folder_path):
             with open(file_path, 'r') as file:
                 data.extend(file.readlines())
         except FileNotFoundError:
-            print(f"El archivo no encontrado: {file_path}")
+            print(f"The file was not found: {file_path}")
         except Exception as e:
-            print(f"No se encuentran interaciones actualmente {file_path}: {e}")
+            print(f"No interactions currently found {file_path}: {e}")
 
-# //////////////////////////////////////////////////////////////////////////////////////////////////
-# 2. CREAR UNA LISTA DE DICCIONARIOS CON LA INFO DE LAS SIMULACIONES
-# Inicializar la lista de diccionarios
-lista_de_diccionarios = []
-
-# Procesar cada grupo de 5 líneas y crear un diccionario
+# creation of diccionary_list variable with all the data to make variables
+diccionary_list = []
 for i in range(0, len(data), 5):
-    grupo = data[i:i+5]
-    diccionario = dict(line.strip().split(': ', 1) for line in grupo)
-    lista_de_diccionarios.append(diccionario)
+    grupo = data[i: i + 5]
+    diccionary = dict(line.strip().split(': ', 1) for line in grupo)
+    diccionary_list.append(diccionary)
 
-# //////////////////////////////////////////////////////////////////////////////////////////////////
-# # 3. OPERAR LOS DICCIONARIOS
-# # INICIALIZADORES DE LOS DICCIONARIOS O DICCIONARIOS NULOS
-conteo_mission = {}
-conteo_device = {}
-conteo_device_status = {}
-conteo_simulaciones = {'count': 0}
-file_number = 0
+# Creation of variables necessary to answer the workshop questions
+count_mission = {}
+count_device = {}
+count_device_status = {}
+count_simulations = {'count': 0}
 
-# # # # # CONTEO DEL NUMERO DE VECES QUE SE REPITE CADA ITEM DENTRO DEL DICCIONARIO
-for item in lista_de_diccionarios:
-    mission_actual = item.get('Mission', 'Esta misión no se realizó')
-    conteo_mission[mission_actual] = conteo_mission.get(mission_actual, 0) + 1
+for item in diccionary_list:
+    mission_actual = item.get('Mission', 'This mission never happened')
+    count_mission[mission_actual] = count_mission.get(mission_actual, 0) + 1
 
-    device_actual = item.get('Device Type', 'Este dispositivo no se utilizó')
-    conteo_device[device_actual] = conteo_device.get(device_actual, 0) + 1
+    device_actual = item.get('Device Type', 'This dispositive was not used in any mission')
+    count_device[device_actual] = count_device.get(device_actual, 0) + 1
 
-    device_status_actual = item.get('Device Status', 'Este status no se genero')
-    conteo_device_status[device_status_actual] = conteo_device_status.get(device_status_actual, 0) + 1
+    device_status_actual = item.get('Device Status', 'This status never happened')
+    count_device_status[device_status_actual] = count_device_status.get(device_status_actual, 0) + 1
 
-# //////////////////////////////////////////////////////////////////////////////////////////////////
-# # # 4. GENERAR EL REPORTE CON LA DATA
-def fecha_reporte():
-    now = datetime.now()
-    return now.strftime('%d%m%Y%H%M%S')
+with open('config.yaml', 'r') as file:
+    config_data = yaml.safe_load(file)
+date_format = config_data['general']['date_format']
+now = datetime.now()
+current_time = now.strftime(date_format)
 
-current_time = fecha_reporte()
 
-if lista_de_diccionarios == []:
-    print ('No hay simulaciones pendientes por reportes')
+config = configparser.ConfigParser()
+config.read('count_reports.ini')
+
+count_of_reports = config.getint('count_of_name_reports', 'count_of_reports')
+count_of_reports += 1
+config.set('count_of_name_reports', 'count_of_reports', str(count_of_reports))
+with open('count_reports.ini', 'w') as config_file:
+    config.write(config_file)
+if diccionary_list == []:
+    print('We do not have pending simulations')
 else:
-    (
-        logging.basicConfig(
-            level=logging.DEBUG,
-            format='%(message)s',
-            datefmt='%d%m%y%H%M%S',
-            filename=f'./proyecto_final/DEVICES/REPORTS/APLSTATS-{file_number}-{current_time}.log',
-            filemode='a')
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format='%(message)s',
+        datefmt='%d%m%y%H%M%S',
+        filename=f'./proyecto_final/DEVICES/REPORTS/APLSTATS-{count_of_reports}-{current_time}.log',
+        filemode='a'
     )
 
-# //////////////////////////////////////////////////////////////////////////////////////////////////
-# DATA A GENERAR
-# # # Conteo total de simulaciones
-for i in lista_de_diccionarios:
-    conteo_simulaciones['count'] += 1
+for i in diccionary_list:
+    count_simulations['count'] += 1
 
-total_simulaciones = conteo_simulaciones['count']
-logging.info(f"Total simulations: {total_simulaciones}\n")
+total_simulations = count_simulations['count']
+logging.info(f"Total simulations: {total_simulations}\n")
 
-# # # Conteo de misiones
-logging.info("Cantidad de eventos por estado y dispositivo: ")
-for mission, conteo_misiones in conteo_mission.items():
+logging.info("Events for status and devices: ")
+for mission, conteo_misiones in count_mission.items():
     logging.info(f'Mission "{mission}": {conteo_misiones}')
-# # # Conteo de tipos de dispositivos
-for device, conteo_dispositivos in conteo_device.items():
-    logging.info(f'Device_type "{device}": {conteo_dispositivos}')
-# # # Conteo de estados de dispositivos
-for device_status, conteo_status_dispositivos in conteo_device_status.items():
-    logging.info(f'device_status "{device_status}": {conteo_status_dispositivos}')
+for device, count_device in count_device.items():
+    logging.info(f'Device_type "{device}": {count_device}')
+for device_status, count_status_devices in count_device_status.items():
+    logging.info(f'device_status "{device_status}": {count_status_devices}')
 
 # //////////////////////////////////////////////////////////////////////////////////////////////////
 logging.info("\n")
-logging.info("Dispositivos que presentan un mayor numero de desconexiones, especificamente en el estado unknown, para cada mision: ")
+logging.info("Devices that present a greater number of disconnections (UNKNOW state for each mission): ")
 
-# Inicializar el diccionario de conteo por mission
 count_unknown_per_mission = {}
-
-# Iterar sobre la lista de diccionarios
-for item in lista_de_diccionarios:
-    # Obtener la misión y el estado del dispositivo
+for item in diccionary_list:
     mission = item['Mission']
     device_status = item['Device Status']
-
-    # Verificar si la misión ya está en el diccionario de conteo
     if mission in count_unknown_per_mission:
-        # Incrementar el conteo si el estado del dispositivo es "unknown"
         count_unknown_per_mission[mission] += 1 if device_status == 'unknown' else 0
     else:
-        # Inicializar el conteo si es la primera vez que se encuentra la misión
         count_unknown_per_mission[mission] = 1 if device_status == 'unknown' else 0
 
-# Imprimir el resultado
 for mission, count in count_unknown_per_mission.items():
-    logging.info(f'Numero de veces que "unknown" aparece en "Device Status" para la mision "{mission}": {count}')
+    logging.info(f'UNKNOW in the mission: "{mission}": {count}')
 
 
 # //////////////////////////////////////////////////////////////////////////////////////////////////
 logging.info("\n")
-logging.info("Consolidacion de misiones con dispositivos inoperables :")
+logging.info("Mission consolidation with inoperable devices (status KILLED and FAULTY): ")
 
-# Inicializar el diccionario de conteo por mission
 count_faulty_killed_per_device = {}
 
-for item in lista_de_diccionarios:
-    # Obtener el tipo de dispositivo y el estado del dispositivo
+for item in diccionary_list:
     device = item['Device Type']
     device_status = item['Device Status']
 
-    # Verificar si el tipo de dispositivo no es "unknown"
-
     if device_status != 'Unknown':
-    # Verificar si el tipo de dispositivo ya está en el diccionario de conteo
         if device in count_faulty_killed_per_device:
-            # Incrementar el conteo si el estado del dispositivo es "killed" o "faulty"
-            count_faulty_killed_per_device[device] += 1 if (device_status == 'killed' or device_status == 'faulty') else 0
+            count_faulty_killed_per_device[device] += (
+                1 if (device_status == 'killed' or device_status == 'faulty') else 0)
         else:
-            # Inicializar el conteo si es la primera vez que se encuentra el tipo de dispositivo
-            count_faulty_killed_per_device[device] = 1 if (device_status == 'killed' or device_status == 'faulty') else 0
-# Imprimir el resultado
+            count_faulty_killed_per_device[device] = (
+                1 if (device_status == 'killed' or device_status == 'faulty') else 0)
 for device, count_device in count_faulty_killed_per_device.items():
-    logging.info(f'Numero de veces que "faulty-killed" aparece en "Device Status" para el dispositivo "{device}": {count_device}')
+    logging.info(f'Number of times "faulty-killed" for the device "{device}": {count_device}')
 
 # //////////////////////////////////////////////////////////////////////////////////////////////////
 
 logging.info("\n")
-logging.info("Porcentaje de datos generados para cada dispositivo y mision respecto a la cantidad de datos: ")
-# # # % Misiones sobre total simulaciones
-total_simulaciones = conteo_simulaciones['count']
-logging.info(f"Total simulations: {total_simulaciones}")
+logging.info("Percentage of data generated for each device and mission with respect to the amount of data: ")
+total_simulations = count_simulations['count']
+logging.info(f"Total simulations: {total_simulations}")
 
-for mission, conteo_misiones in conteo_mission.items():
-    numero = conteo_misiones/total_simulaciones
-    porcentaje = numero * 100
-    logging.info(f'%Mission sobre total iteraciones: "{mission}": {porcentaje:.2f}%')
+for mission, count_mission in count_mission.items():
+    number = count_mission / total_simulations
+    percentage = number * 100
+    logging.info(f'%Mission sobre total iteraciones: "{mission}": {percentage:.2f}%')
 
-# # # % Status misiones sobre total simulaciones
-
-for device_status, conteo_status_dispositivos in conteo_device_status.items():
-    numero = conteo_status_dispositivos/total_simulaciones
-    porcentaje = numero * 100
-    logging.info(f'%Device Status sobre total iteraciones: "{device_status}": {porcentaje:.2f}%')
+for device_status, count_status_devices in count_device_status.items():
+    numero = count_status_devices / total_simulations
+    percentage = numero * 100
+    logging.info(f'%Device Status over total iterations: "{device_status}": {percentage:.2f}%')

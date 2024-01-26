@@ -1,5 +1,4 @@
 import os
-
 import yaml
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -14,11 +13,12 @@ class Mission:
     def __init__(self):
         self.mission = config_data['general']['missions']
 
+
 class Devices:
     def __init__(self):
         self.device = config_data['general']['devices']
 
+
 class Status:
     def __init__(self):
         self.status = config_data['general']['status']
-
