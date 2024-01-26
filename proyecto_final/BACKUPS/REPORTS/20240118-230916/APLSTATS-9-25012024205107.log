@@ -1,0 +1,46 @@
+Total simulations: 5
+
+Events for status and devices: 
+Mission "GALXONE": 1
+Mission "MISSION PIPE %5235235gggg": 1
+Mission "ORBONE": 1
+Mission "TMRS": 1
+Mission "Unknown": 1
+Device_type "Satellite": 1
+Device_type "Space_vehicle": 1
+Device_type "HELLOWORDFJIOASF9020239012##$": 1
+Device_type "Space_rockets": 1
+Device_type "Unknown": 1
+device_status "good": 2
+device_status "excellent": 1
+device_status "faulty": 1
+device_status "unknown": 1
+
+
+Devices that present a greater number of disconnections (UNKNOW state for each mission): 
+UNKNOW in the mission: "GALXONE": 0
+UNKNOW in the mission: "MISSION PIPE %5235235gggg": 0
+UNKNOW in the mission: "ORBONE": 0
+UNKNOW in the mission: "TMRS": 0
+UNKNOW in the mission: "Unknown": 1
+
+
+Mission consolidation with inoperable devices (status KILLED and FAULTY): 
+Number of times "faulty-killed" for the device "Satellite": 0
+Number of times "faulty-killed" for the device "Space_vehicle": 0
+Number of times "faulty-killed" for the device "HELLOWORDFJIOASF9020239012##$": 0
+Number of times "faulty-killed" for the device "Space_rockets": 1
+Number of times "faulty-killed" for the device "Unknown": 0
+
+
+Percentage of data generated for each device and mission with respect to the amount of data: 
+Total simulations: 5
+%Mission sobre total iteraciones: "GALXONE": 20.00%
+%Mission sobre total iteraciones: "MISSION PIPE %5235235gggg": 20.00%
+%Mission sobre total iteraciones: "ORBONE": 20.00%
+%Mission sobre total iteraciones: "TMRS": 20.00%
+%Mission sobre total iteraciones: "Unknown": 20.00%
+%Device Status over total iterations: "good": 40.00%
+%Device Status over total iterations: "excellent": 20.00%
+%Device Status over total iterations: "faulty": 20.00%
+%Device Status over total iterations: "unknown": 20.00%

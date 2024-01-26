@@ -1,0 +1,55 @@
+Total simulations: 10
+
+Events for status and devices: 
+Mission "CLNM": 3
+Mission "GALXONE": 2
+Mission "Unknown": 2
+Mission "MISSION PIPE %5235235gggg": 1
+Mission "ORBONE": 1
+Mission "TMRS": 1
+Device_type "Satellite": 2
+Device_type "Space_rockets": 3
+Device_type "Space_tools": 1
+Device_type "Unknown": 2
+Device_type "Space_vehicle": 1
+Device_type "HELLOWORDFJIOASF9020239012##$": 1
+device_status "PIPELINE": 2
+device_status "warning": 2
+device_status "unknown": 2
+device_status "good": 2
+device_status "excellent": 1
+device_status "faulty": 1
+
+
+Devices that present a greater number of disconnections, specifically in the UNKNOW state, for each mission:: 
+UNKNOW in the mission: "CLNM": 0
+UNKNOW in the mission: "GALXONE": 0
+UNKNOW in the mission: "Unknown": 2
+UNKNOW in the mission: "MISSION PIPE %5235235gggg": 0
+UNKNOW in the mission: "ORBONE": 0
+UNKNOW in the mission: "TMRS": 0
+
+
+Mission consolidation with inoperable devices (status KILLED and FAULTY): 
+Number of times "faulty-killed" appears in "Device Status" for the device "Satellite": 0
+Number of times "faulty-killed" appears in "Device Status" for the device "Space_rockets": 1
+Number of times "faulty-killed" appears in "Device Status" for the device "Space_tools": 0
+Number of times "faulty-killed" appears in "Device Status" for the device "Unknown": 0
+Number of times "faulty-killed" appears in "Device Status" for the device "Space_vehicle": 0
+Number of times "faulty-killed" appears in "Device Status" for the device "HELLOWORDFJIOASF9020239012##$": 0
+
+
+Percentage of data generated for each device and mission with respect to the amount of data: 
+Total simulations: 10
+%Mission sobre total iteraciones: "CLNM": 30.00%
+%Mission sobre total iteraciones: "GALXONE": 20.00%
+%Mission sobre total iteraciones: "Unknown": 20.00%
+%Mission sobre total iteraciones: "MISSION PIPE %5235235gggg": 10.00%
+%Mission sobre total iteraciones: "ORBONE": 10.00%
+%Mission sobre total iteraciones: "TMRS": 10.00%
+%Device Status over total iterations: "PIPELINE": 20.00%
+%Device Status over total iterations: "warning": 20.00%
+%Device Status over total iterations: "unknown": 20.00%
+%Device Status over total iterations: "good": 20.00%
+%Device Status over total iterations: "excellent": 10.00%
+%Device Status over total iterations: "faulty": 10.00%
