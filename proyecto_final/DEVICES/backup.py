@@ -6,19 +6,19 @@ import yaml
 
 # Source and destination paths
 current_directory_path = os.path.dirname(os.path.abspath(__file__))
-#print(f"current_directory_path : {current_directory_path}")
+# print(f"current_directory_path : {current_directory_path}")
 
 proyecto_final_directory = os.path.abspath(os.path.join(current_directory_path, '..'))
-#print(f"proyecto_final_directory : {proyecto_final_directory}")
+# print(f"proyecto_final_directory : {proyecto_final_directory}")
 
 backUps_directory_path = os.path.abspath(os.path.join(proyecto_final_directory, 'BACKUPS'))
-#print(f"backUp_directory : {backUps_directory_path}")
+# print(f"backUp_directory : {backUps_directory_path}")
 
 reports_directory_path = os.path.abspath(os.path.join(current_directory_path, 'REPORTS'))
-#print(f"reports_directory_path : {reports_directory_path}")
+# print(f"reports_directory_path : {reports_directory_path}")
 
 simulations_directory_path = os.path.abspath(os.path.join(current_directory_path, 'SIMULATIONS'))
-#print(f"reports_directory_path : {simulations_directory_path}")
+# print(f"reports_directory_path : {simulations_directory_path}")
 
 #################################################################
 
@@ -32,7 +32,7 @@ current_date = datetime.now().strftime(date_format)
 #################################################################
 
 
-def move_files_simulations(source_path=simulations_directory_path, destination_path=backUps_directory_path, name = current_date):
+def move_files_simulations(source_path=simulations_directory_path, destination_path=backUps_directory_path, name=current_date):
     """
     Move all simulations from source to destination folder.
 
@@ -70,7 +70,7 @@ def move_files_simulations(source_path=simulations_directory_path, destination_p
         print(e)
 
 
-def move_files_reports(source_path = reports_directory_path, destination_path = backUps_directory_path, date_formatted = current_date):
+def move_files_reports(source_path=reports_directory_path, destination_path=backUps_directory_path, date_formatted=current_date):
     """
     Move files starting with 'APLSTATS' from source to destination folder.
 
