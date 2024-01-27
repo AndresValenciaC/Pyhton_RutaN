@@ -2,9 +2,7 @@ import os
 import random
 import time
 from datetime import datetime
-
 import yaml
-
 from .classes import Devices, Mission, Status
 from .functions import hash_format
 
