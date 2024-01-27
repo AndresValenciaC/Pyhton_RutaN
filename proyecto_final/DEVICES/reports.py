@@ -1,7 +1,8 @@
-import logging
-from datetime import datetime
-import os
 import configparser
+import logging
+import os
+from datetime import datetime
+
 import yaml
 
 # abstraction of information from simulations
