@@ -1,5 +1,6 @@
 import os
 import shutil
+from datetime import datetime
 
 import pytest
 
@@ -11,14 +12,14 @@ from proyecto_final.DEVICES.backup import (move_files_reports,
 @pytest.fixture
 def temp_directories():
     current_directory = os.path.dirname(os.path.abspath(__file__))
-    simulations_directory = os.path.join(current_directory, f"proyecto_final/DEVICES/SIMULATIONS")
-    backup_directory = os.path.join(current_directory, f"proyecto_final/BACKUPS")
-    reports_directory = os.path.join(current_directory,f"proyecto_final/DEVICES/REPORTS")
-    #clean_directories(simulations_directory, backup_directory, reports_directory)
-    yield simulations_directory, backup_directory, reports_directory
-    #clean_directories(simulations_directory, backup_directory, reports_directory)
+    simulations_directory = os.path.join(current_directory, '..', 'proyecto_final', 'DEVICES', 'SIMULATIONS')
+    backup_directory = os.path.join(current_directory, '..', 'proyecto_final', 'BACKUPS')
+    reports_directory = os.path.join(current_directory, '..', 'proyecto_final', 'DEVICES','REPORTS')
+
+    return simulations_directory, backup_directory, reports_directory
 
 def test_move_files_simulations(temp_directories):
+    print("****** Ejecutando test_move_files_simulations *******")
     source_path, destination_path, _ = temp_directories
     source_folder = os.path.join(source_path, 'simulation_folder')
     os.makedirs(source_folder)
@@ -36,27 +37,25 @@ def test_move_files_simulations(temp_directories):
     assert os.path.exists(backup_file_path), "The file exist"
 
 
-def test_move_files_report(temp_directories):
-    _,backup_directory, reports_directory = temp_directories
+def test_move_files_reports(temp_directories):
 
-    source_folder = os.path.join(reports_directory, 'reports_folder')
+    simulations_directory, backup_directory, reports_directory = temp_directories
 
-    if not os.path.exists(source_folder):
-     os.makedirs(source_folder)
+    date_formatted = "20220121"
 
-    with open(os.path.join(source_folder, 'APLSTATS_file.txt'), 'w') as f:
-        f.write("Contenido de APLSTATS_file.txt")
+    for i in range(3):
+        with open(os.path.join(reports_directory, f"APLSTATS_{i}.log"), "w") as file:
+            file.write(f"Sample content for APLSTATS_{i}")
 
-    move_files_reports(source_path=reports_directory, destination_path=backup_directory)
-    files_backup_content = os.listdir(backup_directory)
+    move_files_reports(source_path=reports_directory, destination_path=backup_directory, date_formatted=date_formatted)
 
+    for i in range(3):
+        source_file_path = os.path.join(reports_directory, f"APLSTATS_{i}.log")
 
+        destination_file_path = os.path.join(backup_directory, date_formatted, f"APLSTATS_{i}.log")
 
-def clean_directories(*directories):
-    for directory in directories:
-        if os.path.exists(directory):
-            shutil.rmtree(directory)
-
+        assert not os.path.exists(source_file_path)
+        assert os.path.exists(destination_file_path)
 
 
 

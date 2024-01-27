@@ -31,6 +31,7 @@ def report_generator():
     os.system(f'python {reports_dir}')
 
 
+
 def main():
     print("main Running")
     job_file_generation = schedule.every(args.time_cycle).seconds.do(file_generator)
@@ -43,8 +44,8 @@ def main():
 
     except KeyboardInterrupt:
         print("\nProgram finished by user. Back up folder with reports")
-        backup.move_files_simulations()
-        backup.move_files_reports()
+        #backup.move_files_simulations()
+        #backup.move_files_reports()
 
 
 if __name__ == "__main__":
