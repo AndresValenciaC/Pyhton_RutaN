@@ -165,7 +165,6 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
   <a href="https://www.softserveinc.com/en-us" target="_blank" style="vertical-align: middle;">
     <img src="https://cdn.uc.assets.prezly.com/ddf4c03a-d313-4c22-a66a-4f9da1c6939e/" style="width: 50px; height: 100%; vertical-align: middle;">
   </a>
-  <span style="width: 20px; display: inline-block;"></span>
   <a href="https://www.rutanmedellin.org/" target="_blank" style="vertical-align: middle;">
     <img src="https://info.rutanmedellin.org/hubfs/Landing%20ruta%20n/VentaEspacios/thumbnail_pagina.png" style="width: 50px; height: 100%; vertical-align: middle;">
   </a>
