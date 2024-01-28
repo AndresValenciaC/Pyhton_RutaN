@@ -3,87 +3,80 @@ import shutil
 from datetime import datetime
 
 # Source and destination paths
-reports_directory_path = r'C:\Users\miguel.mulcue\OneDrive - Inversiones Internacionales Grupo Sura S.A\Escritorio\Pyhton_RutaN\proyecto_final\DEVICES\REPORTS'
-simulations_directory_path = r'C:\Users\miguel.mulcue\OneDrive - Inversiones Internacionales Grupo Sura S.A\Escritorio\Pyhton_RutaN\proyecto_final\DEVICES\SIMULATIONS'
-backUps_reports_directory_path = r'C:\Users\miguel.mulcue\OneDrive - Inversiones Internacionales Grupo Sura S.A\Escritorio\Pyhton_RutaN\proyecto_final\BACKUPS\REPORTS'
-backUps_simulations_directory_path = r'C:\Users\miguel.mulcue\OneDrive - Inversiones Internacionales Grupo Sura S.A\Escritorio\Pyhton_RutaN\proyecto_final\BACKUPS\SIMULATIONS'
+repo_dic_path = r'C:\Users\miguel.mulcue\OneDrive - Inversiones Internacionales Grupo Sura S.A\Escritorio\Pyhton_RutaN\proyecto_final\DEVICES\REPORTS'
+simul_dic_path = r'C:\Users\miguel.mulcue\OneDrive - Inversiones Internacionales Grupo Sura S.A\Escritorio\Pyhton_RutaN\proyecto_final\DEVICES\SIMULATIONS'
+backUps_repo_dic_path = r'C:\Users\miguel.mulcue\OneDrive - Inversiones Internacionales Grupo Sura S.A\Escritorio\Pyhton_RutaN\proyecto_final\BACKUPS\REPORTS'
+backUps_simul_dic_path = r'C:\Users\miguel.mulcue\OneDrive - Inversiones Internacionales Grupo Sura S.A\Escritorio\Pyhton_RutaN\proyecto_final\BACKUPS\SIMULATIONS'
 
+class FileMover:
+    def __init__(self, source_path, destination_path, name):
+        self.source_path = source_path
+        self.destination_path = destination_path
+        self.name = name
 
-current_date = datetime.now().strftime("%Y%m%d-%H%M%S")
+    def move_files(self):
+        files = os.listdir(self.source_path)
 
-def move_files_reports(source_path=reports_directory_path, destination_path=backUps_reports_directory_path, name = current_date):
-    """
-    Move all reports from source to destination folder.
+        try:
+            if not files:
+                raise FileNotFoundError(f"No files were found in the source folder: {self.source_path}")
 
-    :param source_path: Path to the source folder.
-    :type source_path: str
-    :param destination_path: Path to the destination folder.
-    :type destination_path: str
-    :param name: Unique identifier created with the current date and time.
-    :type name: str
-    """
-    # Get the list of all files in the source folder
-    files = os.listdir(source_path)
+            destination_folder = os.path.join(self.destination_path, self.name)
 
-    try:
-        # If no files are found, raise an exception
-        if not files:
-            raise FileNotFoundError("No files were found in the source folder.")
+            if not os.path.exists(destination_folder):
+                os.makedirs(destination_folder)
 
-        # Create a folder with the current date in the format YYYYMMDD
-        destination_folder = os.path.join(destination_path, name)
+            for file in files:
+                source_file_path = os.path.join(self.source_path, file)
+                destination_file_path = os.path.join(destination_folder, file)
 
-        if not os.path.exists(destination_folder):
-            os.makedirs(destination_folder)
+                try:
+                    shutil.move(source_file_path, destination_file_path)
+                except Exception as e:
+                    # Handle the error as needed
+                    pass
 
-        # Move each file to the destination folder
-        for file in files:
-            source_file_path = os.path.join(source_path, file)
-            destination_file_path = os.path.join(destination_folder, file)
-            try:
-                shutil.move(source_file_path, destination_file_path)
-            except Exception as e:
-                print(f"Error moving file {source_file_path} to {destination_file_path}: {e}")
+        except FileNotFoundError as e:
+            # Handle the error as needed
+            pass
 
-    except FileNotFoundError as e:
-        print(e)
+    def display_info(self):
+        """
+        Display information about the FileMover.
+        """
+        return f"FileMover - Source: {self.source_path}, Destination: {self.destination_path}, Name: {self.name}"
 
-def move_files_simulations(source_path=simulations_directory_path, destination_path=backUps_simulations_directory_path, name = current_date):
-    """
-    Move all simulations from source to destination folder.
+class ReportsMover(FileMover):
+    def __init__(self, name):
+        super().__init__(repo_dic_path, backUps_repo_dic_path, name)
 
-    :param source_path: Path to the source folder.
-    :type source_path: str
-    :param destination_path: Path to the destination folder.
-    :type destination_path: str
-    :param name: Unique identifier created with the current date and time.
-    :type name: str
-    """
-    # Get the list of all files in the source folder
-    files = os.listdir(source_path)
+    def display_info(self):
+        """
+        Override the display_info method for ReportsMover.
+        """
+        return f"ReportsMover - Source: {self.source_path}, Destination: {self.destination_path}, Name: {self.name}"
 
-    try:
-        # If no files are found, raise an exception
-        if not files:
-            raise FileNotFoundError("No files were found in the source folder.")
+class SimulationsMover(FileMover):
+    def __init__(self, name):
+        super().__init__(simul_dic_path, backUps_simul_dic_path, name)
 
-        # Create a folder with the current date in the format YYYYMMDD
-        destination_folder = os.path.join(destination_path, name)
+    def display_info(self):
+        """
+        Override the display_info method for SimulationsMover.
+        """
+        return f"SimulationsMover - Source: {self.source_path}, Destination: {self.destination_path}, Name: {self.name}"
 
-        if not os.path.exists(destination_folder):
-            os.makedirs(destination_folder)
+def main():
+    current_date = datetime.now().strftime("%Y%m%d-%H%M%S")
+    
+    reports_mover = ReportsMover(current_date)
+    simulations_mover = SimulationsMover(current_date)
+    reports_mover.move_files()
+    info_reports_mover = reports_mover.display_info()
+    simulations_mover.move_files()
+    info_simulations_mover = simulations_mover.display_info()
+    print(info_reports_mover)
+    print(info_simulations_mover)
 
-        # Move each file to the destination folder
-        for file in files:
-            source_file_path = os.path.join(source_path, file)
-            destination_file_path = os.path.join(destination_folder, file)
-            try:
-                shutil.move(source_file_path, destination_file_path)
-            except Exception as e:
-                print(f"Error moving file {source_file_path} to {destination_file_path}: {e}")
-
-    except FileNotFoundError as e:
-        print(e)
-
-move_files_reports()
-move_files_simulations()
+if __name__ == "__main__":
+    main()
