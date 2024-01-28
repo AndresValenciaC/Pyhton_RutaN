@@ -8,6 +8,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 reports_file = os.path.join(current_dir, '..', 'proyecto_final', 'DEVICES', 'reports.py')
 LOG_DIR = os.path.join(current_dir, '..', 'proyecto_final', 'DEVICES', 'REPORTS')
 
+
 @pytest.fixture
 def sample_data():
     return [
@@ -15,6 +16,7 @@ def sample_data():
         {'Mission': 'CLNM', 'Device Type': 'Space_vehicle', 'Device Status': 'excellent'},
 
     ]
+
 
 def test_log_file_content(caplog):
 
@@ -30,5 +32,3 @@ def test_log_file_content(caplog):
     print(f"matching_files {matching_files}")
 
     assert matching_files
-
-

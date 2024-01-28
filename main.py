@@ -1,12 +1,12 @@
 import argparse
 import os
 import time
-
 import schedule
 import yaml
 
 from proyecto_final.DEVICES import backup
 from proyecto_final.DEVICES.generate_mission_files import Generate_Files
+
 
 #################################################################
 with open('config.yaml', 'r') as file:
@@ -18,6 +18,7 @@ time_cycle_config_yaml = config_data['general']['time_cycle']
 
 #################################################################
 print("Program start")
+
 
 def file_generator():
     print("Job function file_generator")
@@ -31,11 +32,10 @@ def report_generator():
     os.system(f'python {reports_dir}')
 
 
-
 def main():
     print("main Running")
-    job_file_generation = schedule.every(args.time_cycle).seconds.do(file_generator)
-    job_report_generation =  schedule.every(args.time_cycle).seconds.do(report_generator)
+    schedule.every(args.time_cycle).seconds.do(file_generator)
+    schedule.every(args.time_cycle).seconds.do(report_generator)
 
     try:
         while True:
@@ -44,8 +44,8 @@ def main():
 
     except KeyboardInterrupt:
         print("\nProgram finished by user. Back up folder with reports")
-        #backup.move_files_simulations()
-        #backup.move_files_reports()
+        backup.move_files_simulations()
+        backup.move_files_reports()
 
 
 if __name__ == "__main__":
