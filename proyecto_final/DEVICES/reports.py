@@ -1,7 +1,8 @@
-import logging
-from datetime import datetime
-import os
 import configparser
+import logging
+import os
+from datetime import datetime
+from typing import List, Dict
 import yaml
 
 # abstraction of information from simulations
@@ -9,7 +10,7 @@ script_path = os.path.abspath(__file__)
 folder_path = os.path.join(os.path.dirname(script_path), 'SIMULATIONS')
 
 # creation of Data variable to store all the information
-data = []
+data: List[str] = []
 for root, dirs, files in os.walk(folder_path):
     for filename in files:
         file_path = os.path.join(root, filename)
@@ -22,7 +23,7 @@ for root, dirs, files in os.walk(folder_path):
             print(f"No interactions currently found {file_path}: {e}")
 
 # creation of diccionary_list variable with all the data to make variables
-diccionary_list = []
+diccionary_list: List[dict] = []
 for i in range(0, len(data), 5):
     grupo = data[i: i + 5]
     diccionary = dict(line.strip().split(': ', 1) for line in grupo)
