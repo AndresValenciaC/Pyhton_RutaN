@@ -1,6 +1,5 @@
 import os
-import shutil
-from datetime import datetime
+
 
 import pytest
 
@@ -14,9 +13,10 @@ def temp_directories():
     current_directory = os.path.dirname(os.path.abspath(__file__))
     simulations_directory = os.path.join(current_directory, '..', 'proyecto_final', 'DEVICES', 'SIMULATIONS')
     backup_directory = os.path.join(current_directory, '..', 'proyecto_final', 'BACKUPS')
-    reports_directory = os.path.join(current_directory, '..', 'proyecto_final', 'DEVICES','REPORTS')
+    reports_directory = os.path.join(current_directory, '..', 'proyecto_final', 'DEVICES', 'REPORTS')
 
     return simulations_directory, backup_directory, reports_directory
+
 
 def test_move_files_simulations(temp_directories):
     print("****** Ejecutando test_move_files_simulations *******")
@@ -56,6 +56,3 @@ def test_move_files_reports(temp_directories):
 
         assert not os.path.exists(source_file_path)
         assert os.path.exists(destination_file_path)
-
-
-
