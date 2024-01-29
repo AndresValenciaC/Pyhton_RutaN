@@ -6,8 +6,10 @@ from datetime import datetime
 import yaml
 
 from .classes import Devices, Mission, Status
-from .functions import hash_format
+from .hash_format import HashFormat
 
+instance_Mission = Mission()
+instance_Devices = Devices()
 
 class Generate_Files:
 
@@ -21,10 +23,10 @@ class Generate_Files:
         self.date_formatted = now.strftime(date_format)
 
 
-        self.mission_instance = Mission()
-        self.devices_instance = Devices()
+        self.mission_instance = instance_Mission.get_Mission()
+        self.devices_instance = instance_Devices.get_Devices()
         self.status_instance = Status()
-        self.hash_format = hash_format
+        self.hash_format = HashFormat.hash_format
 
 
     def create_output_directory(self, num_folder :int,times_stamp):
@@ -46,8 +48,8 @@ class Generate_Files:
         :return: random data
         """
         return {
-            "name": random.choice(self.mission_instance.mission),
-            "component": random.choice(self.devices_instance.device),
+            "name": random.choice(instance_Mission.get_Mission()),
+            "component": random.choice(instance_Devices.get_Devices()),
             "status": random.choice(self.status_instance.status),
         }
 

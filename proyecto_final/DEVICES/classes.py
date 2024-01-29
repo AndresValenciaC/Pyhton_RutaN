@@ -1,4 +1,5 @@
 import os
+
 import yaml
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -11,14 +12,18 @@ with open('config.yaml', 'r') as file:
 
 class Mission:
     def __init__(self):
-        self.mission = config_data['general']['missions']
+        self.__mission = config_data['general']['missions']
 
+    def get_Mission(self):
+        return self.__mission
 
 class Devices:
     def __init__(self):
-        self.device = config_data['general']['devices']
+        self._device = config_data['general']['devices']
 
-
+    def get_Devices(self):
+        return self._device
 class Status:
     def __init__(self):
         self.status = config_data['general']['status']
+
