@@ -1,7 +1,6 @@
 import argparse
 import logging
 import os
-import subprocess
 import time
 from datetime import datetime
 
@@ -9,7 +8,7 @@ import schedule
 import yaml
 
 from proyecto_final.DEVICES.backup import ReportsMover, SimulationsMover
-#from proyecto_final.DEVICES import backup
+# from proyecto_final.DEVICES import backup
 from proyecto_final.DEVICES.generate_mission_files import Generate_Files
 
 current_date = datetime.now().strftime("%Y%m%d-%H%M%S")
@@ -56,7 +55,6 @@ def main():
         simulations_mover = SimulationsMover(current_date)
         reports_mover.move_files()
         simulations_mover.move_files()
-
 
 
 if __name__ == "__main__":

@@ -1,0 +1,54 @@
+Total simulations: 26
+
+Events for status and devices: 
+Mission "ORBONE": 7
+Mission "TMRS": 4
+Mission "Unknown": 5
+Mission "CLNM": 3
+Mission "GALXONE": 7
+Device_type "Space_Suit": 4
+Device_type "Satellite": 10
+Device_type "Unknown": 5
+Device_type "Space_tools": 3
+Device_type "Space_vehicle": 3
+Device_type "Space_rockets": 1
+device_status "good": 4
+device_status "warning": 4
+device_status "killed": 3
+device_status "unknown": 9
+device_status "faulty": 2
+device_status "excellent": 3
+device_status "KAJSLFJLAKSF:FIAOJSFOIJASOFJAOISF": 1
+
+
+Devices that present a greater number of disconnections (UNKNOW state for each mission): 
+UNKNOW in the mission: "ORBONE": 2
+UNKNOW in the mission: "TMRS": 0
+UNKNOW in the mission: "Unknown": 5
+UNKNOW in the mission: "CLNM": 1
+UNKNOW in the mission: "GALXONE": 1
+
+
+Mission consolidation with inoperable devices (status KILLED and FAULTY): 
+Number of times "faulty-killed" for the device "Space_Suit": 0
+Number of times "faulty-killed" for the device "Satellite": 4
+Number of times "faulty-killed" for the device "Unknown": 0
+Number of times "faulty-killed" for the device "Space_tools": 0
+Number of times "faulty-killed" for the device "Space_vehicle": 1
+Number of times "faulty-killed" for the device "Space_rockets": 0
+
+
+Percentage of data generated for each device and mission with respect to the amount of data: 
+Total simulations: 26
+%Mission sobre total iteraciones: "ORBONE": 26.92%
+%Mission sobre total iteraciones: "TMRS": 15.38%
+%Mission sobre total iteraciones: "Unknown": 19.23%
+%Mission sobre total iteraciones: "CLNM": 11.54%
+%Mission sobre total iteraciones: "GALXONE": 26.92%
+%Device Status over total iterations: "good": 15.38%
+%Device Status over total iterations: "warning": 15.38%
+%Device Status over total iterations: "killed": 11.54%
+%Device Status over total iterations: "unknown": 34.62%
+%Device Status over total iterations: "faulty": 7.69%
+%Device Status over total iterations: "excellent": 11.54%
+%Device Status over total iterations: "KAJSLFJLAKSF:FIAOJSFOIJASOFJAOISF": 3.85%

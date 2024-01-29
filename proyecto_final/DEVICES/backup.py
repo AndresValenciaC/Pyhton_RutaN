@@ -60,6 +60,7 @@ class FileMover:
         """
         return f"FileMover - Source: {self.source_path}, Destination: {self.destination_path}, Name: {self.name}"
 
+
 class ReportsMover(FileMover):
     def __init__(self, name):
         super().__init__(r_dic_path, backUps_dic_r_path, name)
@@ -70,6 +71,7 @@ class ReportsMover(FileMover):
         """
         return f"ReportsMover - Source: {self.source_path}, Destination: {self.destination_path}, Name: {self.name}"
 
+
 class SimulationsMover(FileMover):
     def __init__(self, name):
         super().__init__(s_dic_path, backUps_dic_s_path, name)
@@ -79,4 +81,3 @@ class SimulationsMover(FileMover):
         Override the display_info method for SimulationsMover.
         """
         return f"SimulationsMover - Source: {self.source_path}, Destination: {self.destination_path}, Name: {self.name}"
-

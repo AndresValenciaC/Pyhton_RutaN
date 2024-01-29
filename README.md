@@ -73,14 +73,14 @@ You can customize the configuration settings in two ways:
 
 Alternatively, you can change specific configurations using command-line arguments with argparse. Here are the variables you can use:
 
-- `--numfiles_initicial`: Specify the initial number of files.
+- `--numfiles_initial`: Specify the initial number of files.
 - `--numfiles_final`: Specify the final number of files.
 - `--time_cycle`: Specify the time cycle.
 
 Example:
 
 ```bash
-python main.py --numfiles_initicial 10 --numfiles_final 20 --time_cycle 5
+python main.py --num_files_initial 5 --num_files_final 24 --time_cycle 8
 ```
 ## Testing
 

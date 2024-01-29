@@ -1,9 +1,9 @@
 import os
-
 from proyecto_final.DEVICES.generate_mission_files import Generate_Files
 
 current_directory = os.path.dirname(os.path.abspath(__file__))
 simulations_directory = os.path.join(current_directory, '..', 'proyecto_final', 'DEVICES', 'SIMULATIONS')
+
 
 def test_create_output_directory():
     generator_instance = Generate_Files()

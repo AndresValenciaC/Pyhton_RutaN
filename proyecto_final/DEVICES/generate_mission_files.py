@@ -5,12 +5,13 @@ from datetime import datetime
 
 import yaml
 
-from .classes import Devices, Mission, Status
-from .hash_format import HashFormat
+from .classes import Devices, Mission, Status, HashFormat
 
 # Instances Classes
 instance_Mission = Mission()
 instance_Device = Devices()
+
+
 class Generate_Files:
 
     def __init__(self):
@@ -21,8 +22,6 @@ class Generate_Files:
 
         now = datetime.now()
         self.date_formatted = now.strftime(date_format)
-
-
         self.mission_instance = instance_Mission.get_Mission()
         self.devices_instance = instance_Device.get_Devices()
         self.status_instance = Status()
@@ -88,4 +87,3 @@ class Generate_Files:
                 file.write(f"Device Type: {component}\n")
                 file.write(f"Device Status: {status}\n")
                 file.write(f"Hash: {hash_m}\n")
-

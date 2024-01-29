@@ -1,0 +1,54 @@
+Total simulations: 75
+
+Events for status and devices: 
+Mission "CLNM": 9
+Mission "GALXONE": 18
+Mission "ORBONE": 16
+Mission "TMRS": 14
+Mission "Unknown": 18
+Device_type "Space_Suit": 10
+Device_type "Space_vehicle": 9
+Device_type "Space_rockets": 8
+Device_type "Satellite": 22
+Device_type "Space_tools": 8
+Device_type "Unknown": 18
+device_status "warning": 10
+device_status "excellent": 7
+device_status "faulty": 3
+device_status "good": 9
+device_status "unknown": 30
+device_status "killed": 8
+device_status "KAJSLFJLAKSF:FIAOJSFOIJASOFJAOISF": 8
+
+
+Devices that present a greater number of disconnections (UNKNOW state for each mission): 
+UNKNOW in the mission: "CLNM": 3
+UNKNOW in the mission: "GALXONE": 5
+UNKNOW in the mission: "ORBONE": 4
+UNKNOW in the mission: "TMRS": 0
+UNKNOW in the mission: "Unknown": 18
+
+
+Mission consolidation with inoperable devices (status KILLED and FAULTY): 
+Number of times "faulty-killed" for the device "Space_Suit": 2
+Number of times "faulty-killed" for the device "Space_vehicle": 1
+Number of times "faulty-killed" for the device "Space_rockets": 1
+Number of times "faulty-killed" for the device "Satellite": 7
+Number of times "faulty-killed" for the device "Space_tools": 0
+Number of times "faulty-killed" for the device "Unknown": 0
+
+
+Percentage of data generated for each device and mission with respect to the amount of data: 
+Total simulations: 75
+%Mission sobre total iteraciones: "CLNM": 12.00%
+%Mission sobre total iteraciones: "GALXONE": 24.00%
+%Mission sobre total iteraciones: "ORBONE": 21.33%
+%Mission sobre total iteraciones: "TMRS": 18.67%
+%Mission sobre total iteraciones: "Unknown": 24.00%
+%Device Status over total iterations: "warning": 13.33%
+%Device Status over total iterations: "excellent": 9.33%
+%Device Status over total iterations: "faulty": 4.00%
+%Device Status over total iterations: "good": 12.00%
+%Device Status over total iterations: "unknown": 40.00%
+%Device Status over total iterations: "killed": 10.67%
+%Device Status over total iterations: "KAJSLFJLAKSF:FIAOJSFOIJASOFJAOISF": 10.67%

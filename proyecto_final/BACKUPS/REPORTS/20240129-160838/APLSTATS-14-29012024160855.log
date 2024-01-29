@@ -1,0 +1,52 @@
+Total simulations: 46
+
+Events for status and devices: 
+Mission "CLNM": 7
+Mission "GALXONE": 7
+Mission "TMRS": 10
+Mission "Unknown": 11
+Mission "ORBONE": 11
+Device_type "Satellite": 12
+Device_type "Space_vehicle": 8
+Device_type "Unknown": 11
+Device_type "Space_tools": 7
+Device_type "Space_rockets": 6
+Device_type "Space_Suit": 2
+device_status "warning": 7
+device_status "killed": 8
+device_status "unknown": 12
+device_status "faulty": 6
+device_status "excellent": 4
+device_status "good": 9
+
+
+Devices that present a greater number of disconnections (UNKNOW state for each mission): 
+UNKNOW in the mission: "CLNM": 0
+UNKNOW in the mission: "GALXONE": 1
+UNKNOW in the mission: "TMRS": 0
+UNKNOW in the mission: "Unknown": 11
+UNKNOW in the mission: "ORBONE": 0
+
+
+Mission consolidation with inoperable devices (status KILLED and FAULTY): 
+Number of times "faulty-killed" for the device "Satellite": 6
+Number of times "faulty-killed" for the device "Space_vehicle": 3
+Number of times "faulty-killed" for the device "Unknown": 0
+Number of times "faulty-killed" for the device "Space_tools": 1
+Number of times "faulty-killed" for the device "Space_rockets": 3
+Number of times "faulty-killed" for the device "Space_Suit": 1
+
+
+Percentage of data generated for each device and mission with respect to the amount of data: 
+Total simulations: 46
+%Mission sobre total iteraciones: "CLNM": 15.22%
+%Mission sobre total iteraciones: "GALXONE": 15.22%
+%Mission sobre total iteraciones: "TMRS": 21.74%
+%Mission sobre total iteraciones: "Unknown": 23.91%
+%Mission sobre total iteraciones: "ORBONE": 23.91%
+%Device Status over total iterations: "warning": 15.22%
+%Device Status over total iterations: "killed": 17.39%
+%Device Status over total iterations: "unknown": 26.09%
+%Device Status over total iterations: "faulty": 13.04%
+%Device Status over total iterations: "excellent": 8.70%
+%Device Status over total iterations: "good": 19.57%
