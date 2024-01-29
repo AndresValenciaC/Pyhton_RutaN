@@ -76,16 +76,16 @@ class Generate_Files:
             date_time = self.date_formatted
             hash_m = self.hash_format(date_time, name, component, status)
 
-        if name == "UNKN":
-            name, component, status, hash_m = "Unknown", "Unknown", "unknown", "unknown"
+            if name == "UNKN":
+                name, component, status, hash_m = "Unknown", "Unknown", "unknown", "unknown"
 
-        file_name = f"APL[{name}]-0000[{self.file_number}].log"
-        file_path = os.path.join(output_directory, file_name)
+            file_name = f"APL[{name}]-0000[{self.file_number}].log"
+            file_path = os.path.join(output_directory, file_name)
 
-        with open(file_path, 'w') as file:
-            file.write(f"Date: {date_time}\n")
-            file.write(f"Mission: {name}\n")
-            file.write(f"Device Type: {component}\n")
-            file.write(f"Device Status: {status}\n")
-            file.write(f"Hash: {hash_m}\n")
+            with open(file_path, 'w') as file:
+                file.write(f"Date: {date_time}\n")
+                file.write(f"Mission: {name}\n")
+                file.write(f"Device Type: {component}\n")
+                file.write(f"Device Status: {status}\n")
+                file.write(f"Hash: {hash_m}\n")
 
