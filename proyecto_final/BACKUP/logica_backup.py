@@ -3,10 +3,20 @@ import shutil
 from datetime import datetime
 
 # Source and destination paths
-repo_dic_path = r'C:\Users\miguel.mulcue\OneDrive - Inversiones Internacionales Grupo Sura S.A\Escritorio\Pyhton_RutaN\proyecto_final\DEVICES\REPORTS'
-simul_dic_path = r'C:\Users\miguel.mulcue\OneDrive - Inversiones Internacionales Grupo Sura S.A\Escritorio\Pyhton_RutaN\proyecto_final\DEVICES\SIMULATIONS'
-backUps_repo_dic_path = r'C:\Users\miguel.mulcue\OneDrive - Inversiones Internacionales Grupo Sura S.A\Escritorio\Pyhton_RutaN\proyecto_final\BACKUPS\REPORTS'
-backUps_simul_dic_path = r'C:\Users\miguel.mulcue\OneDrive - Inversiones Internacionales Grupo Sura S.A\Escritorio\Pyhton_RutaN\proyecto_final\BACKUPS\SIMULATIONS'
+current_dic_path = os.path.dirname(os.path.abspath(__file__))
+# print(f"current_dic_path : {current_dic_path}")
+
+print(current_dic_path)
+
+proyecto_final_dic = os.path.abspath(os.path.join(current_dic_path, '.'))
+# print(f"proyecto_final_dic : {proyecto_final_dic}")
+
+# # Source and destination paths
+repo_dic_path = os.path.abspath(os.path.join(current_dic_path, 'REPORTS'))
+simul_dic_path = os.path.abspath(os.path.join(current_dic_path, 'SIMULATIONS'))
+backUps_repo_dic_path = os.path.abspath(os.path.join(current_dic_path, '.BACKUPS/REPORTS'))
+backUps_simul_dic_path = os.path.abspath(os.path.join(current_dic_path, '.BACKUPS/SIMULATIONS'))
+
 
 class FileMover:
     def __init__(self, source_path, destination_path, name):

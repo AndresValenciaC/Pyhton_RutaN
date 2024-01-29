@@ -3,7 +3,7 @@ import os
 import time
 import schedule
 import yaml
-
+import logging
 from proyecto_final.DEVICES import backup
 from proyecto_final.DEVICES.generate_mission_files import Generate_Files
 
@@ -17,23 +17,26 @@ num_files_final_config_yaml = config_data['general']['num_files_final']
 time_cycle_config_yaml = config_data['general']['time_cycle']
 
 #################################################################
-print("Program start")
+logging.basicConfig(level=logging.INFO, format='%(message)s')
+logging.basicConfig(level=logging.WARNING, format='%(message)s')
+logging.info("Welcome to APOLO 11 Project, it's activate")
+logging.info("Program start")
 
 
 def file_generator():
-    print("Job function file_generator")
+    logging.warning("Job function file_generator")
     generate_files_instance.generate_files(args.num_files_initial, args.num_files_final)
 
 
 def report_generator():
-    print("Job function report_generator")
+    logging.warning("Job function report_generator")
     current_dir = os.path.dirname(os.path.abspath(__file__))
     reports_dir = os.path.abspath(os.path.join(current_dir, 'proyecto_final', 'DEVICES', 'reports.py'))
     os.system(f'python {reports_dir}')
 
 
 def main():
-    print("main Running")
+    logging.warning("main Running")
     schedule.every(args.time_cycle).seconds.do(file_generator)
     schedule.every(args.time_cycle).seconds.do(report_generator)
 
@@ -43,7 +46,7 @@ def main():
             time.sleep(1)
 
     except KeyboardInterrupt:
-        print("\nProgram finished by user. Back up folder with reports")
+        logging.warning("\nProgram finished by user. Back up folder with reports")
         backup.move_files_simulations()
         backup.move_files_reports()
 
