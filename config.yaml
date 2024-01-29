@@ -1,6 +1,6 @@
 general:
-  num_files_initial: 4
-  num_files_final: 10
+  num_files_initial: 16
+  num_files_final: 20
   time_cycle: 5
   status:
     - excellent

@@ -1,14 +1,14 @@
 import os
 import yaml
 from typing import List
+from dataclasses import dataclass
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 project_dir = os.path.abspath(os.path.join(script_dir, os.pardir, os.pardir))
 config_path = os.path.join(project_dir, 'config.ini')
 
-with open('config.yaml', 'r') as file:
-    config_data = yaml.safe_load(file)
-
+# with open('config.yaml', 'r') as file:
+#     config_data = yaml.safe_load(file)
 
 class Mission:
     """Represents the mission within the program's context.
@@ -24,6 +24,7 @@ class Mission:
     
     """
     def __init__(self):
+        config_data = Configuration.load_config()
         self.__mission: List[str] = config_data['general']['missions']
     
     def get_Mission(self):
@@ -46,6 +47,7 @@ class Devices:
         get_mission: A method for retrieving the private attribute 'mission'
     """
     def __init__(self):
+        config_data = Configuration.load_config()
         self._device: List[str] = config_data['general']['devices']
 
     def get_Devices(self):
@@ -63,4 +65,29 @@ class Status:
         status (str): (PUBLIC ATRIBUTE) Manages entity status from config.yaml list.
     """
     def __init__(self):
+        config_data = Configuration.load_config()
         self.status: List[str] = config_data['general']['status']
+
+
+class Configuration:
+    """
+    Manages centralized loading and access to the application's configuration.
+
+    This class implements the Singleton pattern to load and store the application's
+    configuration from a YAML file, ensuring that configuration data is loaded
+    only once and reused throughout the program.
+
+    Class Attributes:
+        __config_data (dict): A private class variable that stores the loaded configuration from 'config.yaml'. It is only accessible within the class and cannot be directly modified from outside.
+
+    Methods:
+        load_config (cls): A class method that loads the configuration from 'config.yaml' if it has not been loaded yet. Returns the configuration dictionary for use in other classes.
+    """
+    __config_data = None
+
+    @classmethod
+    def load_config(cls):
+        if cls.__config_data is None:
+            with open('config.yaml', 'r') as file:
+                cls.__config_data = yaml.safe_load(file)
+        return cls.__config_data

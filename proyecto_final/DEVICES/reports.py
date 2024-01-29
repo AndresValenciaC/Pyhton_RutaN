@@ -45,13 +45,14 @@ for item in diccionary_list:
     device_status_actual = item.get('Device Status', 'This status never happened')
     count_device_status[device_status_actual] = count_device_status.get(device_status_actual, 0) + 1
 
+
+
+# Config for use in the creation of the name of Reporters
 with open('config.yaml', 'r') as file:
     config_data = yaml.safe_load(file)
 date_format = config_data['general']['date_format']
 now = datetime.now()
 current_time = now.strftime(date_format)
-
-
 config = configparser.ConfigParser()
 config.read('count_reports.ini')
 
@@ -71,6 +72,8 @@ else:
         filemode='a'
     )
 
+
+# Create the data necesary for the reports. Asnwer the questions 
 for i in diccionary_list:
     count_simulations['count'] += 1
 

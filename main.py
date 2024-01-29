@@ -4,8 +4,11 @@ import time
 import schedule
 import yaml
 import logging
-from proyecto_final.DEVICES import backup
 from proyecto_final.DEVICES.generate_mission_files import Generate_Files
+from proyecto_final.DEVICES import backup
+from datetime import datetime 
+import time
+
 
 
 #################################################################
@@ -15,6 +18,10 @@ with open('config.yaml', 'r') as file:
 num_files_initial_config_yaml = config_data['general']['num_files_initial']
 num_files_final_config_yaml = config_data['general']['num_files_final']
 time_cycle_config_yaml = config_data['general']['time_cycle']
+
+date_format = config_data['general']['date_format']
+current_date = datetime.now().strftime(date_format)
+
 
 #################################################################
 logging.basicConfig(level=logging.INFO, format='%(message)s')
@@ -35,6 +42,7 @@ def report_generator():
     os.system(f'python {reports_dir}')
 
 
+
 def main():
     logging.warning("main Running")
     schedule.every(args.time_cycle).seconds.do(file_generator)
@@ -47,8 +55,8 @@ def main():
 
     except KeyboardInterrupt:
         logging.warning("\nProgram finished by user. Back up folder with reports")
-        backup.move_files_simulations()
-        backup.move_files_reports()
+        backup.ReportsMover(current_date)
+        backup.SimulationsMover(current_date)
 
 
 if __name__ == "__main__":
