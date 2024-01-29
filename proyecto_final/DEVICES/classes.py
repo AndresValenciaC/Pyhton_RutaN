@@ -25,8 +25,13 @@ class Mission:
 
     """
     def __init__(self):
-        self.mission = config_data['general']['missions']
+        self.__mission: List[str] = config_data['general']['missions']
 
+    def get_Mission(self):
+        return self.__mission
+
+# mission_instan = Mission()
+# print(mission_instan.get_Mission())
 
 class Devices:
     """Manages and represents devices within the program.
@@ -42,10 +47,12 @@ class Devices:
         get_mission: A method for retrieving the private attribute 'mission'
     """
     def __init__(self):
-        self.device = config_data['general']['devices']
+        self._device: List[str] = config_data['general']['devices']
 
     def get_Devices(self):
         return self._device
+
+
 class Status:
     """Represents and manages the status of an object or entity in the program.
 
@@ -57,4 +64,4 @@ class Status:
         status (str): (PUBLIC ATRIBUTE) Manages entity status from config.yaml list.
     """
     def __init__(self):
-        self.status = config_data['general']['status']
+        self.status: List[str] = config_data['general']['status']
