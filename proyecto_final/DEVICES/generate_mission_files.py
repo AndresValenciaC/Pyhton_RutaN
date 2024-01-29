@@ -1,78 +1,91 @@
-import configparser
 import os
 import random
+import time
 from datetime import datetime
-from .project_dummy_data import hash_format,date_format
 
-config = configparser.ConfigParser()
-config.read('config.ini')
+import yaml
 
+from .classes import Devices, Mission, Status
+from .hash_format import HashFormat
+
+# Instances Classes
+instance_Mission = Mission()
+instance_Device = Devices()
 class Generate_Files:
 
-   def __init__(self):
-      self.devices_status = config.get('general', 'devices_status').split(',')
-      self.hash_format = hash_format
-      self.date_format = date_format
-      self.counter_folder = 0
-      self.counter_file = 0
+    def __init__(self):
+        with open('config.yaml', 'r') as file:
+            config_data = yaml.safe_load(file)
 
-   def generate_mission_files(self,missions,num_files):
-     self.counter_folder +=1
-     current_directory = os.path.dirname(os.path.abspath(__file__))
+        date_format = config_data['general']['date_format']
 
-     output_directory = os.path.join(current_directory, f"SIMULACIONES/Folder-{self.counter_folder}")
+        now = datetime.now()
+        self.date_formatted = now.strftime(date_format)
 
 
-     if not os.path.exists(output_directory):
-        os.makedirs(output_directory)
+        self.mission_instance = instance_Mission.get_Mission()
+        self.devices_instance = instance_Device.get_Devices()
+        self.status_instance = Status()
+        self.hash_format = HashFormat.hash_format
 
-     all_files_data = []
+    def create_output_directory(self, num_folder: int, times_stamp):
+        """This method will create a directory in the correct path
+        :param num_folder: folder number
+        :type num_folder: int
+        :param times_stamp: unique id for the folder
+        :return: will return the output_directory path
+        :rtype: string
+        """
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        output_directory = os.path.join(current_directory, f"SIMULATIONS/Folder-{num_folder}-{times_stamp}")
 
-     for mission in missions:
-         name = mission["name"]
-         components = mission["components"]
+        os.makedirs(output_directory, exist_ok=True)
+        return output_directory
 
-         status_components = {component : random.choice(self.devices_status) for component in components}
+    def generate_file_data(self):
+        """The method will return the data to create the files
+        :return: random data
+        """
+        return {
+            "name": random.choice(instance_Mission.get_Mission()),
+            "component": random.choice(instance_Device.get_Devices()),
+            "status": random.choice(self.status_instance.status),
+        }
 
-         if name == "UNKN":
-            name = "Unknown"
-            component = "Unknown"
-            status_components = "Unknown"
-            component_data.append({"mission": name, "component": component, "status": status_components})
-         else:
+    def generate_files(self, num_files_from: int, num_files_to: int):
+        """This function takes create_output_directory to create folders
+        and put them in the wanted path and the function generate_file_data
+        to get the necessary info for the creation of the files
 
-          component_data = [{"mission": name, "component": component, "status": status} for component, status in status_components.items()]
-         all_files_data.extend(component_data)
+        :param num_files_from: the start number for the range of numbers
+        :type num_files_from: int
+        :param num_files_to: the final number for the range of numbers
+        :type num_files_to: int
+        """
+        timestamp = int(time.time())
+        num_random = random.randrange(num_files_from, num_files_to)
+        output_directory = self.create_output_directory(num_random, timestamp)
 
-     selected_files_data = selected_files_data = random.choices(all_files_data, k=num_files)
+        # This data structure generates the data as many times required for each file
+        all_files_data = [self.generate_file_data() for _ in range(num_random)]
+        self.file_number = 0
 
-     for file_data in selected_files_data:
-         self.counter_file +=1
-         name = file_data["mission"]
-         component = file_data["component"]
-         status = file_data["status"]
-         date_time = self.date_format()
-         file_name = f"APL[{name}]_{component}-0000{self.counter_file}.log"
-         file_path = os.path.join(output_directory, file_name)
+        for file_data in all_files_data:
+            self.file_number += 1
+            name, component, status = file_data["name"], file_data["component"], file_data["status"]
+            date_time = self.date_formatted
+            hash_m = self.hash_format(date_time, name, component, status)
 
-         with open(file_path, 'w') as file:
-            hash_m =  self.hash_format(date_time,name,component,status)
-            file.write("Date: " + date_time + "\n")
-            file.write("Mission: " + name + "\n")
-            file.write("Device Type: " + component + "\n")
-            file.write("Device Status: " + status + "\n")
-            file.write("Hash: " + hash_m + "\n")
+            if name == "UNKN":
+                name, component, status, hash_m = "Unknown", "Unknown", "unknown", "unknown"
 
+            file_name = f"APL[{name}]-0000[{self.file_number}].log"
+            file_path = os.path.join(output_directory, file_name)
 
-
-
-
-
-
-
-
-
-
-
-
+            with open(file_path, 'w') as file:
+                file.write(f"Date: {date_time}\n")
+                file.write(f"Mission: {name}\n")
+                file.write(f"Device Type: {component}\n")
+                file.write(f"Device Status: {status}\n")
+                file.write(f"Hash: {hash_m}\n")
 
