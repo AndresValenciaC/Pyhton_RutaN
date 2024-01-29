@@ -1,13 +1,17 @@
 import os
+
 from proyecto_final.DEVICES.generate_mission_files import Generate_Files
 
+current_directory = os.path.dirname(os.path.abspath(__file__))
+simulations_directory = os.path.join(current_directory, '..', 'proyecto_final', 'DEVICES', 'SIMULATIONS')
 
 def test_create_output_directory():
     generator_instance = Generate_Files()
     num_folder = 5
     times_stamp = 123456789
+    expected_output_directory = os.path.join(simulations_directory, f"Folder-{num_folder}-{times_stamp}")
     output_directory = generator_instance.create_output_directory(num_folder, times_stamp)
-    assert output_directory == "/Users/andrescampovalencia/Desktop/proyecto_final/proyecto_final/DEVICES/SIMULATIONS/Folder-5-123456789"
+    assert output_directory == expected_output_directory
 
 
 def test_generate_file_data():
@@ -19,17 +23,17 @@ def test_generate_file_data():
 
 
 def test_verify_file_format():
-    output_directory = "/Users/andrescampovalencia/Desktop/proyecto_final/proyecto_final/DEVICES/SIMULATIONS/"
+
     instance = Generate_Files()
     num_files_from, num_files_to = 5, 10
 
     instance.generate_files(num_files_from, num_files_to)
 
-    generated_folders = os.listdir(output_directory)
+    generated_folders = os.listdir(simulations_directory)
     print(f"generated_folders: {generated_folders}")
 
     for generated_folder in generated_folders:
-        folder_path = os.path.join(output_directory, generated_folder)
+        folder_path = os.path.join(simulations_directory, generated_folder)
 
         if os.path.isdir(folder_path):
             print(f"Processing contents of folder: {folder_path}")

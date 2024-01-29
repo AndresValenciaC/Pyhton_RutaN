@@ -30,9 +30,6 @@ class Mission:
     def get_Mission(self):
         return self.__mission
 
-# mission_instan = Mission()
-# print(mission_instan.get_Mission())
-
 class Devices:
     """Manages and represents devices within the program.
 

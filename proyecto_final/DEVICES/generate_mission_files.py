@@ -89,7 +89,3 @@ class Generate_Files:
             file.write(f"Device Status: {status}\n")
             file.write(f"Hash: {hash_m}\n")
 
-
-# instancia = Generate_Files()
-# if __name__ == "__main__":
-# instancia.generate_files(5, 12)

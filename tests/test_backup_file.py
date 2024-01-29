@@ -1,6 +1,5 @@
 import os
 
-
 import pytest
 
 from proyecto_final.DEVICES.backup import (move_files_reports,
@@ -19,7 +18,6 @@ def temp_directories():
 
 
 def test_move_files_simulations(temp_directories):
-    print("****** Ejecutando test_move_files_simulations *******")
     source_path, destination_path, _ = temp_directories
     source_folder = os.path.join(source_path, 'simulation_folder')
     os.makedirs(source_folder)
