@@ -2,7 +2,7 @@ import configparser
 import logging
 import os
 from datetime import datetime
-from typing import List, Dict
+from typing import List
 import yaml
 
 # abstraction of information from simulations

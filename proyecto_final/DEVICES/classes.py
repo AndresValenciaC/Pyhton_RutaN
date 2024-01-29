@@ -1,5 +1,6 @@
 import os
 import yaml
+from typing import List
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 project_dir = os.path.abspath(os.path.join(script_dir, os.pardir, os.pardir))
@@ -17,11 +18,19 @@ class Mission:
     generate_mission_files.
 
     Attributes:
-        mission (str): Stores mission information obtained from the configuration (confing.yaml) list of missions.
+        __mission (str): (PRIVATE ATRIBUTE) Stores mission information obtained from the configuration (confing.yaml) list of missions.
+    Methods:
+        get_Mission: Using the method getter for get the private attribute mission.  
+    
     """
     def __init__(self):
-        self.mission = config_data['general']['missions']
+        self.__mission: List[str] = config_data['general']['missions']
+    
+    def get_Mission(self):
+        return self.__mission
 
+# mission_instan = Mission()
+# print(mission_instan.get_Mission())
 
 class Devices:
     """Manages and represents devices within the program.
@@ -31,10 +40,16 @@ class Devices:
     obtained from configuration (config.yaml) list of devices.
 
     Attributes:
-        device (str): Contains information about the device from the configuration (config.yaml) list of devices.
+        _device (str): A semi-public attribute containing information about the device from the configuration (config.yaml) list of devices.
+    
+    Methods:
+        get_mission: A method for retrieving the private attribute 'mission'
     """
     def __init__(self):
-        self.device = config_data['general']['devices']
+        self._device: List[str] = config_data['general']['devices']
+
+    def get_Devices(self):
+        return self._device
 
 
 class Status:
@@ -45,7 +60,7 @@ class Status:
     methods for its subsequent management or query.
 
     Attributes:
-        status (str): Manages entity status from config.yaml list.
+        status (str): (PUBLIC ATRIBUTE) Manages entity status from config.yaml list.
     """
     def __init__(self):
-        self.status = config_data['general']['status']
+        self.status: List[str] = config_data['general']['status']
