@@ -1,5 +1,6 @@
 import os
 import yaml
+from typing import List
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 project_dir = os.path.abspath(os.path.join(script_dir, os.pardir, os.pardir))
@@ -23,7 +24,7 @@ class Mission:
     
     """
     def __init__(self):
-        self.__mission = config_data['general']['missions']
+        self.__mission: List[str] = config_data['general']['missions']
     
     def get_Mission(self):
         return self.__mission
@@ -45,7 +46,7 @@ class Devices:
         get_mission: A method for retrieving the private attribute 'mission'
     """
     def __init__(self):
-        self._device = config_data['general']['devices']
+        self._device: List[str] = config_data['general']['devices']
 
     def get_Devices(self):
         return self._device
@@ -62,4 +63,4 @@ class Status:
         status (str): (PUBLIC ATRIBUTE) Manages entity status from config.yaml list.
     """
     def __init__(self):
-        self.status = config_data['general']['status']
+        self.status: List[str] = config_data['general']['status']
